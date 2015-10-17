@@ -1,0 +1,20 @@
+<Resource auth="Container" driverClassName="org.postgresql.Driver"
+	type="javax.sql.DataSource" maxActive="20" maxIdle="10" maxWait="-1"
+	name="jdbc/AgenciaDS" username="?!?" password="?!?"
+	url="postgresql://$OPENSHIFT_POSTGRESQL_DB_HOST:$OPENSHIFT_POSTGRESQL_DB_PORT/agencia" />
+	
+<!-- 
+Ver este link: http://edermag.blogspot.com.br/2013/04/openshift-como-configurar-o-datasource.html
+
+cp ./app-root/runtime/build-dependencies/.m2/repository/org/postgresql/postgresql/9.4-1201-jdbc41/postgresql-9.4-1201-jdbc41.jar app-root/data/.
+
+vi ./jbossews/conf/catalina.properties
+
+Adicione no fim da propriedade common.loader o conteúdo: ,${catalina.home}/../data/*.jar
+
+
+https://forums.openshift.com/tomcat-7-jboss-ews-20-mysql-51-hibernate-no-persistence-unit-found
+
+https://forums.openshift.com/suitable-driver-found-for-jdbcpostgresql
+
+ -->
