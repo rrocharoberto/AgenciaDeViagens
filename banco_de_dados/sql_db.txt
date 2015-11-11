@@ -1,0 +1,280 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema agencia
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema agencia
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `agencia` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `agencia` ;
+
+-- -----------------------------------------------------
+-- Table `agencia`.`estado`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`estado` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `uf` VARCHAR(2) NOT NULL COMMENT '',
+  `nome` VARCHAR(50) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  UNIQUE INDEX `uf_UNIQUE` (`uf` ASC)  COMMENT '')
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`cidade`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`cidade` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `estado_id` INT NOT NULL COMMENT '',
+  `nome` VARCHAR(50) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_cidade_estado1_idx` (`estado_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_cidade_estado1`
+    FOREIGN KEY (`estado_id`)
+    REFERENCES `agencia`.`estado` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`ponto_turistico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`ponto_turistico` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `descricao` VARCHAR(100) NOT NULL COMMENT '',
+  `numero_vagas` INT NULL COMMENT '',
+  `cidade_id` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_ponto_turistico_cidade1_idx` (`cidade_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_ponto_turistico_cidade1`
+    FOREIGN KEY (`cidade_id`)
+    REFERENCES `agencia`.`cidade` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`pacote`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`pacote` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `data_inicio` DATE NOT NULL COMMENT '',
+  `data_fim` DATE NOT NULL COMMENT '',
+  `quantidade_pessoas` INT NOT NULL COMMENT '',
+  `cidade_id` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_pacote_cidade1_idx` (`cidade_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_pacote_cidade1`
+    FOREIGN KEY (`cidade_id`)
+    REFERENCES `agencia`.`cidade` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`reserva_pontos_turisticos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`reserva_pontos_turisticos` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `date` DATE NOT NULL COMMENT '',
+  `id_ponto_turistico` INT NOT NULL COMMENT '',
+  `pacote_id` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_reserva_ponto_turistico1_idx` (`id_ponto_turistico` ASC)  COMMENT '',
+  INDEX `fk_reserva_pontos_turisticos_pacote1_idx` (`pacote_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_reserva_ponto_turistico1`
+    FOREIGN KEY (`id_ponto_turistico`)
+    REFERENCES `agencia`.`ponto_turistico` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reserva_pontos_turisticos_pacote1`
+    FOREIGN KEY (`pacote_id`)
+    REFERENCES `agencia`.`pacote` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`cliente` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `cpf` VARCHAR(45) NULL COMMENT '',
+  `nome` VARCHAR(45) NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`hotel`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`hotel` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `nome` VARCHAR(100) NOT NULL COMMENT '',
+  `valor` FLOAT NOT NULL COMMENT '',
+  `numero_vagas` INT NOT NULL COMMENT '',
+  `cidade_id` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_hotel_cidade1_idx` (`cidade_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_hotel_cidade1`
+    FOREIGN KEY (`cidade_id`)
+    REFERENCES `agencia`.`cidade` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`hotel_reserva`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`hotel_reserva` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `pacote_id` INT NOT NULL COMMENT '',
+  `hotel_id` INT NOT NULL COMMENT '',
+  `data_reserva` DATE NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_hotel_reserva_pacote1_idx` (`pacote_id` ASC)  COMMENT '',
+  INDEX `fk_hotel_reserva_hotel1_idx` (`hotel_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_hotel_reserva_pacote1`
+    FOREIGN KEY (`pacote_id`)
+    REFERENCES `agencia`.`pacote` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_hotel_reserva_hotel1`
+    FOREIGN KEY (`hotel_id`)
+    REFERENCES `agencia`.`hotel` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`restaurante`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`restaurante` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `nome` VARCHAR(100) NOT NULL COMMENT '',
+  `numero_vagas` INT NOT NULL COMMENT '',
+  `valor` FLOAT NOT NULL COMMENT '',
+  `cidade_id` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_restaurante_cidade1_idx` (`cidade_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_restaurante_cidade1`
+    FOREIGN KEY (`cidade_id`)
+    REFERENCES `agencia`.`cidade` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`restaurante_reserva`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`restaurante_reserva` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `pacote_id` INT NOT NULL COMMENT '',
+  `restaurante_id` INT NOT NULL COMMENT '',
+  `data_reserva` DATE NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_restaurante_reserva_pacote1_idx` (`pacote_id` ASC)  COMMENT '',
+  INDEX `fk_restaurante_reserva_restaurante1_idx` (`restaurante_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_restaurante_reserva_pacote1`
+    FOREIGN KEY (`pacote_id`)
+    REFERENCES `agencia`.`pacote` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_restaurante_reserva_restaurante1`
+    FOREIGN KEY (`restaurante_id`)
+    REFERENCES `agencia`.`restaurante` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`voo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`voo` (
+  `id` INT NOT NULL COMMENT '',
+  `nome_compania` VARCHAR(45) NULL COMMENT '',
+  `quantidade_pessoas` INT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`voo_reserva`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`voo_reserva` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `voo_id` INT NOT NULL COMMENT '',
+  `pacote_id` INT NOT NULL COMMENT '',
+  `data_embarque` DATE NOT NULL COMMENT '',
+  `tipo_voo` INT NOT NULL COMMENT '',
+  `cidade_origem_id` INT NOT NULL COMMENT '',
+  `cidade_destino_id` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_voo_reserva_voo1_idx` (`voo_id` ASC)  COMMENT '',
+  INDEX `fk_voo_reserva_pacote1_idx` (`pacote_id` ASC)  COMMENT '',
+  INDEX `fk_voo_reserva_cidade1_idx` (`cidade_origem_id` ASC)  COMMENT '',
+  INDEX `fk_voo_reserva_cidade2_idx` (`cidade_destino_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_voo_reserva_voo1`
+    FOREIGN KEY (`voo_id`)
+    REFERENCES `agencia`.`voo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_voo_reserva_pacote1`
+    FOREIGN KEY (`pacote_id`)
+    REFERENCES `agencia`.`pacote` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_voo_reserva_cidade1`
+    FOREIGN KEY (`cidade_origem_id`)
+    REFERENCES `agencia`.`cidade` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_voo_reserva_cidade2`
+    FOREIGN KEY (`cidade_destino_id`)
+    REFERENCES `agencia`.`cidade` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `agencia`.`pagamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agencia`.`pagamento` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `forma_pagamento` INT NOT NULL COMMENT '',
+  `cliente_id` INT NOT NULL COMMENT '',
+  `pacote_id` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `fk_pagamento_cliente1_idx` (`cliente_id` ASC)  COMMENT '',
+  INDEX `fk_pagamento_pacote1_idx` (`pacote_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_pagamento_cliente1`
+    FOREIGN KEY (`cliente_id`)
+    REFERENCES `agencia`.`cliente` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pagamento_pacote1`
+    FOREIGN KEY (`pacote_id`)
+    REFERENCES `agencia`.`pacote` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
