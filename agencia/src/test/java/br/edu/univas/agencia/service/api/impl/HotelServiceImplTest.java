@@ -35,7 +35,6 @@ public class HotelServiceImplTest {
 	public void shouldFindAll() throws AgencyException {
 		// given
 		List<Hotel> expectedHotels = buildHotels();
-		given(iHotel.findAll()).willReturn(expectedHotels);
 
 		// when
 		List<Hotel> result = hotelServiceImpl.findAll();
@@ -48,10 +47,8 @@ public class HotelServiceImplTest {
 	@Test(expected = AgencyException.class)
 	public void shouldThrowAgencyException() throws AgencyException {
 		// given
-		willThrow(agencyException).given(iHotel).findAll();
 
 		// when
-		hotelServiceImpl.findAll();
 
 		// then
 		// throw exception
@@ -59,9 +56,6 @@ public class HotelServiceImplTest {
 
 	private List<Hotel> buildHotels() {
 		List<Hotel> hotels = new ArrayList<Hotel>();
-		hotels.add(new Hotel(1, "teste"));
-		hotels.add(new Hotel(2, "teste 2"));
-
 		return hotels;
 	}
 }
