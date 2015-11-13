@@ -25,46 +25,23 @@ import javax.persistence.TemporalType;
 @Table(name = "pacote", catalog = "agencia")
 public class Pacote implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Cidade cidade;
 	private Date dataInicio;
 	private Date dataFim;
 	private int quantidadePessoas;
 	private Set<HotelReserva> hotelReservas = new HashSet<HotelReserva>(0);
-	private Set<RestauranteReserva> restauranteReservas = new HashSet<RestauranteReserva>(
-			0);
+	private Set<RestauranteReserva> restauranteReservas = 
+			new HashSet<RestauranteReserva>(0);
 	private Set<Pagamento> pagamentos = new HashSet<Pagamento>(0);
-	private Set<ReservaPontosTuristicos> reservaPontosTuristicoses = new HashSet<ReservaPontosTuristicos>(
-			0);
+	private Set<ReservaPontosTuristicos> reservaPontosTuristicoses = 
+			new HashSet<ReservaPontosTuristicos>(0);
+	
 	private Set<VooReserva> vooReservas = new HashSet<VooReserva>(0);
-
-	public Pacote() {
-	}
-
-	public Pacote(Cidade cidade, Date dataInicio, Date dataFim,
-			int quantidadePessoas) {
-		this.cidade = cidade;
-		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;
-		this.quantidadePessoas = quantidadePessoas;
-	}
-
-	public Pacote(Cidade cidade, Date dataInicio, Date dataFim,
-			int quantidadePessoas, Set<HotelReserva> hotelReservas,
-			Set<RestauranteReserva> restauranteReservas,
-			Set<Pagamento> pagamentos,
-			Set<ReservaPontosTuristicos> reservaPontosTuristicoses,
-			Set<VooReserva> vooReservas) {
-		this.cidade = cidade;
-		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;
-		this.quantidadePessoas = quantidadePessoas;
-		this.hotelReservas = hotelReservas;
-		this.restauranteReservas = restauranteReservas;
-		this.pagamentos = pagamentos;
-		this.reservaPontosTuristicoses = reservaPontosTuristicoses;
-		this.vooReservas = vooReservas;
-	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
