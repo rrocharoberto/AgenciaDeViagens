@@ -21,7 +21,7 @@ import br.edu.univas.agencia.model.Cidade;
 @Path("/city")
 public class CityServiceImpl implements CityService {
 
-	private CityBusiness cityBusiness = new CityBusiness();;
+	private CityBusiness cityBusiness = new CityBusiness();
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
