@@ -1,4 +1,4 @@
-package br.edu.univas.agencia.model;
+package br.edu.univas.agencia.exception;
 
 public class AgencyException extends Exception {
 
