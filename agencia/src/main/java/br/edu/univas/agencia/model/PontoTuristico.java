@@ -2,13 +2,18 @@ package br.edu.univas.agencia.model;
 
 // Generated 11/11/2015 21:59:26 by Hibernate Tools 3.4.0.CR1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,28 +27,18 @@ import javax.persistence.Table;
 @Table(name = "ponto_turistico", catalog = "agencia")
 public class PontoTuristico implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Cidade cidade;
 	private String descricao;
 	private Integer numeroVagas;
-	private Set<ReservaPontosTuristicos> reservaPontosTuristicoses = new HashSet<ReservaPontosTuristicos>(
-			0);
-
-	public PontoTuristico() {
-	}
-
-	public PontoTuristico(Cidade cidade, String descricao) {
-		this.cidade = cidade;
-		this.descricao = descricao;
-	}
-
-	public PontoTuristico(Cidade cidade, String descricao, Integer numeroVagas,
-			Set<ReservaPontosTuristicos> reservaPontosTuristicoses) {
-		this.cidade = cidade;
-		this.descricao = descricao;
-		this.numeroVagas = numeroVagas;
-		this.reservaPontosTuristicoses = reservaPontosTuristicoses;
-	}
+	private Set<ReservaPontosTuristicos> reservaPontosTuristicoses = 
+			new HashSet<ReservaPontosTuristicos>(0);
+	
+	private Map<Date,Boolean> daysAvailable = new HashMap<Date, Boolean>();
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -93,5 +88,14 @@ public class PontoTuristico implements java.io.Serializable {
 			Set<ReservaPontosTuristicos> reservaPontosTuristicoses) {
 		this.reservaPontosTuristicoses = reservaPontosTuristicoses;
 	}
+
+	public Map<Date, Boolean> getDaysAvailable() {
+		return daysAvailable;
+	}
+
+	public void setDaysAvailable(Map<Date, Boolean> daysAvailable) {
+		this.daysAvailable = daysAvailable;
+	}
+	
 
 }
