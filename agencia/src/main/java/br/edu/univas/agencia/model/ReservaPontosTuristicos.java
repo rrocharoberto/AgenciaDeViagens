@@ -22,20 +22,15 @@ import javax.persistence.TemporalType;
 @Table(name = "reserva_pontos_turisticos", catalog = "agencia")
 public class ReservaPontosTuristicos implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Pacote pacote;
 	private PontoTuristico pontoTuristico;
 	private Date date;
 
-	public ReservaPontosTuristicos() {
-	}
-
-	public ReservaPontosTuristicos(Pacote pacote,
-			PontoTuristico pontoTuristico, Date date) {
-		this.pacote = pacote;
-		this.pontoTuristico = pontoTuristico;
-		this.date = date;
-	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
