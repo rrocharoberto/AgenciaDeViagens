@@ -1,4 +1,4 @@
-app.factory('CityService', ['$http', 'RESTServiceCity', function($http, RESTServiceCity) {
+app.factory('CityService', ['RESTServiceCity', function(RESTServiceCity) {
     var service = {
         getCities : function() {
             return RESTServiceCity.listCities();

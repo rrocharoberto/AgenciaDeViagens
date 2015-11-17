@@ -1,0 +1,19 @@
+<section>
+    <form ng-submit="createPackage()">
+        Cidade:
+        <select ng-model="package.cidade" ng-options="city as city.nome for city in cities">
+            <option>--</option>
+        </select>
+
+        Data inicial:
+        <input type="date" ng-model="package.dataInicio" />
+
+        Data final:
+        <input type="date" ng-model="package.dataFim" />
+
+        Qtde de pessoas:
+        <input type="number" ng-model="package.quantidadePessoas" min="1" />
+
+        <input type="submit" value="Criar pacote">
+    </form>
+</section>

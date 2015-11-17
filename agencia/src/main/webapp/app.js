@@ -1,5 +1,6 @@
 var app = angular.module('AgencyApp', [
-	'ngRoute'
+	'ngRoute',
+	'toastr'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -8,11 +9,10 @@ app.config(['$routeProvider', function($routeProvider) {
 			controller: 'IndexController',
 			templateUrl: 'views/index.html'
 		}).
-		when('/city', {
-			controller : 'CityController',
-			templateUrl: 'views/index.html'
-		}).
-		otherwise( {redirectTo: '/'});
+		when('/create-package', {
+			controller : 'CreatePackageController',
+			templateUrl: 'views/create-package.html'
+		});
 }]);
 
 // Define a constant to connect with web service

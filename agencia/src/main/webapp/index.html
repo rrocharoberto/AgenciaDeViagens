@@ -9,6 +9,9 @@
 	<!-- <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap/bootstrap-responsive.min.css" rel="stylesheet"> -->
 
+	<!-- CSS for toastr -->
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+
 	<!-- Agency Style -->
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -20,18 +23,23 @@
 	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 
+	<!-- toastr -->
+	<script type="text/javascript" src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+
 	<!-- App -->
 	<script type="text/javascript" src="app.js"></script>
 
 	<!-- REST Services -->
 	<script type="text/javascript" src="scripts/rest/RESTServiceCity.js"></script>
+	<script type="text/javascript" src="scripts/rest/RESTServicePackage.js"></script>
 
 	<!-- Services -->
 	<script type="text/javascript" src="scripts/services/CityService.js"></script>
+	<script type="text/javascript" src="scripts/services/PackageService.js"></script>
 
 	<!-- Controllers -->
 	<script type="text/javascript" src="scripts/controllers/IndexController.js"></script>
-	<script type="text/javascript" src="scripts/controllers/CityController.js"></script>
+	<script type="text/javascript" src="scripts/controllers/CreatePackageController.js"></script>
 
 	<!-- Directive -->
 
