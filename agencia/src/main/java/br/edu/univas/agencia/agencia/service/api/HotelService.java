@@ -5,7 +5,6 @@ import java.util.Collection;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Hotel;
 import br.edu.univas.agencia.model.HotelReserva;
-import br.edu.univas.agencia.model.Pacote;
 
 /**
  * Interface to define the services related to hotel.
@@ -22,7 +21,7 @@ public interface HotelService {
 	 * @return the list of hotels available.
 	 * @throws AgencyException
 	 */
-	Collection<Hotel> listHotels(Pacote pacote) throws AgencyException;
+	Collection<Hotel> listHotels(int packageId) throws AgencyException;
 
 	/**
 	 * create reservation for hotel.
@@ -31,7 +30,7 @@ public interface HotelService {
 	 * @param hotelReserva
 	 * @throws AgencyException
 	 */
-	void createHotelReservation(Pacote pacote, HotelReserva hotelReserva)
+	void createHotelReservation(HotelReserva hotelReserva)
 			throws AgencyException;
 
 }

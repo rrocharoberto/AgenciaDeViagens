@@ -20,6 +20,8 @@ function($scope, toastr, CityService, PackageService) {
         toastr.success('Sucesso ao realizar o cadastro!', {
             closeButton: true
         });
+        PackageService.setPackage($scope.package);
+        window.location.href = '#flight';
     };
 
     $scope.loadCity();
