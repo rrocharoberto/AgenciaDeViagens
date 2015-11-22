@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 
 import br.edu.univas.agencia.agencia.service.api.FlightService;
 import br.edu.univas.agencia.exception.AgencyException;
@@ -25,7 +26,7 @@ public class FlightServiceImpl implements FlightService {
 	@GET
 	@Path("/type")
 	@Override
-	public List<Integer> listFlightTypes(Pacote pacote) throws AgencyException {
+	public List<Integer> listFlightTypes(@QueryParam("packageId") int packageId) throws AgencyException {
 		// TODO packageValidator.validatePackage();
 		// TODO return flightBusiness.listFlightTypes();
 		return null;
@@ -33,8 +34,7 @@ public class FlightServiceImpl implements FlightService {
 
 	@GET
 	@Override
-	public Map<String, Collection<Voo>> listFlights(Pacote pacote)
-			throws AgencyException {
+	public Collection<Voo> listFlights(@QueryParam("packageId") int packageId) throws AgencyException {
 		// TODO packageValidator.validatePackage();
 		// TODO return flightBusiness.listFlights();
 		return null;
@@ -43,7 +43,7 @@ public class FlightServiceImpl implements FlightService {
 	@POST
 	@Path("/reservation")
 	@Override
-	public void createFlightReservation(Pacote pacote, VooReserva vooReserva)
+	public void createFlightReservation(VooReserva vooReserva)
 			throws AgencyException {
 		// TODO packageValidator.validatePackage();
 		// TODO flightBusiness.validateReservation();
