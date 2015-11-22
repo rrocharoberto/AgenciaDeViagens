@@ -9,10 +9,8 @@ import java.util.List;
 /**
  * Class that implements interface {@link IRestaurant}. This class is
  * responsible by business logic to module of restaurant.
- *
- * @author Felipe Prado
  */
-public class Restaurant implements IRestaurant {
+public class RestaurantService implements IRestaurant {
 
     @Override
     public Restaurante createRestaurant(Restaurante restaurant) throws AgencyException {

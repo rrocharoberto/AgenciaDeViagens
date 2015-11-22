@@ -9,8 +9,6 @@ import java.util.List;
 /**
  * Interface that define methods of communication of module restaurant. This
  * methods controlling the registration of restaurants and reserves.
- *
- * @author Felipe Prado
  */
 public interface IRestaurant {
 
@@ -85,7 +83,7 @@ public interface IRestaurant {
     /**
      * Method responsible by controlling the getting of reserve by ID.
      *
-     * @param reserveId
+     * @param reserveId Reserve ID
      * @return {@link RestauranteReserva}
      * @throws AgencyException
      */
