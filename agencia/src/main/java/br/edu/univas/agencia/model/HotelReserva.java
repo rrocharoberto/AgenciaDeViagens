@@ -22,6 +22,10 @@ import javax.persistence.TemporalType;
 @Table(name = "hotel_reserva", catalog = "agencia")
 public class HotelReserva implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Pacote pacote;
 	private Hotel hotel;
