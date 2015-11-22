@@ -24,7 +24,7 @@ public interface RestaurantService {
 	 * @return the list of restaurant available.
 	 * @throws AgencyException
 	 */
-	Collection<Restaurante> listRestaurants(Pacote pacote) throws AgencyException;
+	Collection<Restaurante> listRestaurants(int packageId) throws AgencyException;
 
 	/**
 	 * create reservation for restaurant.
@@ -33,6 +33,6 @@ public interface RestaurantService {
 	 * @param restaurantReserva
 	 * @throws AgencyException
 	 */
-	void createRestaurantReservation(Pacote pacote, RestauranteReserva restauranteReserva)
+	void createRestaurantReservation(RestauranteReserva restauranteReserva)
 			throws AgencyException;
 }

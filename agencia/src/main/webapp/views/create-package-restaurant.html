@@ -1,0 +1,9 @@
+<section>
+    <form ng-submit="savePackage()">
+        Restaurante:
+        <select ng-model="restaurantReservation.restaurante" ng-options="restaurant as restaurant.nome for restaurant in restaurants">
+        </select>
+
+        <input type="submit" value="Salvar">
+    </form>
+</section>
