@@ -1,4 +1,4 @@
-package br.edu.univas.agencia.hotel.service;
+package br.edu.univas.agencia.hotel;
 
 import br.edu.univas.agencia.model.AgencyException;
 
