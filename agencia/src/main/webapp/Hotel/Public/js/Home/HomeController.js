@@ -1,8 +1,14 @@
 var HomeController = (function(){
 	
 	init = function(){
-		//Common.loadHeader();
+		setEvents();
+	};
+	
+	setEvents = function(){
 		$(".dropdown-button").dropdown();
+		$("#home").attr('href', 'http://localhost:8080/agencia/api/hotel/root/home')
+		$("#register").attr('href', 'http://localhost:8080/agencia/api/hotel/root/register');
+		$("#report").attr('href', 'http://localhost:8080/agencia/api/hotel/root/report');
 	};
 	
 	return {
