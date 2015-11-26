@@ -24,6 +24,10 @@ app.config(['$routeProvider', function($routeProvider) {
 		when('/restaurant', {
 			controller: 'RestaurantController',
 			templateUrl: 'views/create-package-restaurant.html'
+		}).
+		when('/atractions', {
+			controller: 'AtractionsController',
+			templateUrl: 'views/create-package-atractions.html'
 		});
 }]);
 

@@ -1,0 +1,11 @@
+<section>
+    <form ng-submit="savePackage()">
+        <div ng-repeat="atraction in atractions">
+            {{atraction.descricao}} |
+            <div ng-repeat="day in atraction.daysAvailable">
+                <input type="checkbox" name="name" value="day.value" ng-model="atractionsReservation.$index.daysAvailable">
+                {{day}}
+            </div>
+        </div>
+    </form>
+</section>
