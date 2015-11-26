@@ -1,4 +1,4 @@
-package br.edu.univas.agencia.hotel.hotelDAO;
+package br.edu.univas.agencia.hotel;
 
 import java.util.List;
 

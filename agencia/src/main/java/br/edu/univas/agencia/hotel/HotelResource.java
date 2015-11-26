@@ -15,8 +15,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import br.edu.univas.agencia.exception.AgencyException;
+import br.edu.univas.agencia.model.Hotel;
+
 @Path("/root")
 public class HotelResource {
+	
+	private HotelService hotelService = new HotelService();
 
 	@GET
 	@Path("/home")
@@ -44,10 +49,23 @@ public class HotelResource {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
 	public void create(@FormParam("name") String name,
-					   @FormParam("value") String value,
-					   @FormParam("city") String city,
-					   @FormParam("rooms") String rooms,
-            		   @FormParam("isActive") String isActive) {
-
+					   @FormParam("value") Float value,
+					   @FormParam("city") Integer city,
+					   @FormParam("rooms") Integer rooms,
+            		   @FormParam("isActive") boolean isActive) throws AgencyException {
+		
+		try{
+			
+			Hotel hotel = new Hotel();
+			hotel.setNome(name);
+			hotel.setValor(value);
+			hotel.setCidade(null); //TODO: getCityById
+			hotel.setNumeroVagas(rooms);
+			hotel.setActive(isActive);
+			hotelService.createHotel(hotel);
+			
+		}catch(Exception ex){
+			throw new AgencyException("Não foi possível criar um novo hotel!");
+		}
 	}
 }

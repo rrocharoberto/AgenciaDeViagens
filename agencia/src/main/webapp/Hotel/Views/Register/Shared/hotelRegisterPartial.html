@@ -5,11 +5,11 @@
 			<form id="hotelRegisterForm" method="POST" class="col s12">
 				<div class="row">
 					<div class="input-field col s8">
-						<input id="hotel_name" type="text" class="validate" required> 
+						<input id="hotel_name" type="text" class="validate" maxlength="50" required> 
 						<label for="hotel_name">Nome</label>
 					</div>
 					<div class="input-field col s4">
-						<input id="hotel_daily_value" type="text" class="validate" required>
+						<input id="hotel_daily_value" type="text" class="validate" maxlength="11" required>
 						<label for="hotel_daily_value">Valor da diaria</label>
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 						<label>Cidade</label>
 					</div>
 					<div class="input-field col s4">
-						<input id="hotel_rooms" type="text" class="validate" required>
+						<input id="hotel_rooms" type="text" class="validate" maxlength="3" required>
 						<label for="hotel_rooms">Num. de quartos</label>
 					</div>
 				</div>
@@ -46,4 +46,5 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="../../Public/js/common/jquery.maskMoney.js"></script>
 <script type="text/javascript" src="../../Public/js/Register/RegisterModalController.js"></script>

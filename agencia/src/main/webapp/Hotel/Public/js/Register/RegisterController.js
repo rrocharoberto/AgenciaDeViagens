@@ -61,7 +61,7 @@ var RegisterController = (function() {
 
 	loadHotelRegisterPartial = function() {
 		$("#divToHotelRegisterPartial").load(
-				"/agencia/Hotel/Views/Home/Shared/hotelRegisterPartial.html",
+				"/agencia/Hotel/Views/Register/Shared/hotelRegisterPartial.html",
 				function(res, status, req) {
 					if (status == "success") {
 						$("#hotelRegisterModal").openModal();
