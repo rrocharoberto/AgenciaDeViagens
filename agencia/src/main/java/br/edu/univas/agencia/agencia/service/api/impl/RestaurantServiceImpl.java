@@ -24,14 +24,15 @@ import br.edu.univas.agencia.model.RestauranteReserva;
 @Path("/restaurant")
 public class RestaurantServiceImpl implements RestaurantService {
 
+	PackageBusiness packageBusiness = new PackageBusiness();
+	RestaurantBussiness restaurantBusiness = new RestaurantBussiness();
+
 	@GET
 	@Override
 	public Collection<Restaurante> listRestaurants(
 			@QueryParam("packageId") int packageId) throws AgencyException {
-		PackageBusiness packageBusiness = new PackageBusiness();
-		Pacote pacote = packageBusiness.retrivePackage(packageId);
 
-		RestaurantBussiness restaurantBusiness = new RestaurantBussiness();
+		Pacote pacote = packageBusiness.retrivePackage(packageId);
 		return restaurantBusiness.listRestaurants(pacote);
 	}
 
