@@ -7,6 +7,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
+import br.edu.univas.agencia.agencia.business.PackageBusiness;
+import br.edu.univas.agencia.agencia.business.RestaurantBussiness;
 import br.edu.univas.agencia.agencia.service.api.RestaurantService;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Pacote;
@@ -20,20 +22,24 @@ import br.edu.univas.agencia.model.RestauranteReserva;
  *
  */
 @Path("/restaurant")
-public class RestautantServiceImpl implements RestaurantService {
+public class RestaurantServiceImpl implements RestaurantService {
 
 	@GET
 	@Override
-	public Collection<Restaurante> listRestaurants(@QueryParam("packageId") int packageId)
-			throws AgencyException {
-		// TODO restaurantBusiness.listRestaurants();
-		return null;
+	public Collection<Restaurante> listRestaurants(
+			@QueryParam("packageId") int packageId) throws AgencyException {
+		PackageBusiness packageBusiness = new PackageBusiness();
+		Pacote pacote = packageBusiness.retrivePackage(packageId);
+
+		RestaurantBussiness restaurantBusiness = new RestaurantBussiness();
+		return restaurantBusiness.listRestaurants(pacote);
 	}
 
 	@POST
 	@Path("/reservation")
 	@Override
-	public void createRestaurantReservation(RestauranteReserva restauranteReserva) throws AgencyException {
+	public void createRestaurantReservation(
+			RestauranteReserva restauranteReserva) throws AgencyException {
 		// TODO packageValidator.validatePackage();
 		// TODO restaurantBusiness.validateReservation();
 		// TODO restaurantBusiness.createRestaurantReservation();
