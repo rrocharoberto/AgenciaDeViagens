@@ -14,21 +14,15 @@ public interface PackageService {
 
 	/**
 	 * Get list of packages concluded.
+	 * 
 	 * @return
 	 * @throws AgencyException
 	 */
 	Collection<Pacote> listPackages() throws AgencyException;
 
 	/**
-	 * Get a package by id.
-	 * @param packageId
-	 * @return
-	 * @throws AgencyException
-	 */
-	Pacote retrivePackage(int packageId) throws AgencyException;
-	
-	/**
 	 * Create package.
+	 * 
 	 * @param pacote
 	 * @throws AgencyException
 	 */

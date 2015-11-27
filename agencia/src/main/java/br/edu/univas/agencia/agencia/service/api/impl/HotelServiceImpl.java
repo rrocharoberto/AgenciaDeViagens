@@ -12,14 +12,14 @@ import br.edu.univas.agencia.agencia.service.api.HotelService;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Hotel;
 import br.edu.univas.agencia.model.HotelReserva;
-import br.edu.univas.agencia.model.Pacote;
+
 
 /**
  * Implementation of services defined in {@link HotelService}.
  * @author edilson
  *
  */
-@Path("/hotel")
+@Path("/hotelAgency")
 public class HotelServiceImpl implements HotelService {
 
 	@GET

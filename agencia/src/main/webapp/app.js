@@ -32,4 +32,4 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 // Define a constant to connect with web service
-app.value('URL', 'http://localhost:8080/agencia/api');
+app.value('URL', 'http://localhost:8080/agencia/apiAgency');

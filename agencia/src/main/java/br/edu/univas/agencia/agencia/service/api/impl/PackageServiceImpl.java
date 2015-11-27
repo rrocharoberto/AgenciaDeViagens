@@ -26,13 +26,6 @@ public class PackageServiceImpl implements PackageService {
 		//TODO  return packageBusiness.listPackages();
 		return null;
 	}
-	
-	@GET
-	@Override
-	public Pacote retrivePackage(@QueryParam("packageId") int packageId) throws AgencyException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@POST
 	@Override

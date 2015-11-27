@@ -42,7 +42,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AgenciaViagens</servlet-name>
-    <url-pattern>/api/*</url-pattern>
+    <url-pattern>/apiAgency/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Hotel</servlet-name>
