@@ -57,8 +57,8 @@ public class TuristicPointServiceImpl implements TuristicPointService {
 	@Path("/reservation")
 	@Override
 	public void createTuristicPointReservation(AtractionsReservation atractionsReservation) {
-		// TODO Auto-generated method stub
-
+		//TODO: convert to a list of TuristicPoint
+		//TODO: save turisticPointReservation
 	}
 
 }

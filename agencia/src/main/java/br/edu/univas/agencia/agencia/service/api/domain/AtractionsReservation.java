@@ -9,13 +9,13 @@ import br.edu.univas.agencia.model.PontoTuristico;
 @XmlRootElement
 public class AtractionsReservation {
 
-	private List<PontoTuristico> atractions;
+	private List<Atraction> atractions;
 
-	public List<PontoTuristico> getAtractions() {
+	public List<Atraction> getAtractions() {
 		return atractions;
 	}
 
-	public void setAtractions(List<PontoTuristico> atractions) {
+	public void setAtractions(List<Atraction> atractions) {
 		this.atractions = atractions;
 	}
 

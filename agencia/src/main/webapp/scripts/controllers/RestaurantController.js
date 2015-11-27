@@ -24,6 +24,6 @@ function($scope, toastr, PackageService, RestaurantService) {
         toastr.success('Sucesso ao salvar o pacote!', {
             closeButtonn: true
         });
-        window.location.href = '#restaurant';
+        window.location.href = '#atractions';
     };
 }]);

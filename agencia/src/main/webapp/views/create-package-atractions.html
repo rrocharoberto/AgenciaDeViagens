@@ -1,11 +1,13 @@
 <section>
     <form ng-submit="savePackage()">
-        <div ng-repeat="atraction in atractions">
-            {{atraction.descricao}} |
-            <div ng-repeat="day in atraction.daysAvailable">
-                <input type="checkbox" name="name" value="day.value" ng-model="atractionsReservation.$index.daysAvailable">
-                {{day}}
+        <div ng-repeat="atraction in atractionsLoaded">
+            {{atraction.descricao}} --
+            <div ng-repeat="(key, value) in atraction.daysAvailable | orderBy:'-key'">
+                <input type="checkbox" ng-model="atractionsReservation.atractions[$parent.$index].daysAvailable[key]" />
+                {{key | date:'dd/MM/yyyy'}}
             </div>
         </div>
+
+        <input type="submit" value="Salvar">
     </form>
 </section>
