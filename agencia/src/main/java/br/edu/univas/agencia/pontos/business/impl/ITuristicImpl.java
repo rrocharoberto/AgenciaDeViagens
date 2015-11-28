@@ -17,7 +17,7 @@ public class ITuristicImpl {
 	private PontosTuristicosDAO ptDAO;
 	
 	public ITuristicImpl(){
-		ptDAO = new PontosTuristicosDAO(HibernateUtil.getEntityManager());
+		//ptDAO = new PontosTuristicosDAO(HibernateUtil.getEntityManager());
 	}
 
 	public List<PontoTuristico> getAvailableAttractions(Pacote pacote) throws ParseException{
@@ -50,7 +50,7 @@ public class ITuristicImpl {
 		return attractionsOfTheCity;
 	}
 	
-	public List<Date> getDaysOfPeriod(Pacote pacote, List<Date> daysBetweenPeriods) throws ParseException {
+	public void getDaysOfPeriod(Pacote pacote, List<Date> daysBetweenPeriods) throws ParseException {
 		Date dt1 = pacote.getDataInicio();
 		Date dt2 = pacote.getDataFim();
 
@@ -61,7 +61,6 @@ public class ITuristicImpl {
 			cal.add(Calendar.DATE, +1);
 			dt = cal.getTime();
 		}
-		return daysBetweenPeriods;
 	}
 
 	
@@ -71,7 +70,7 @@ public class ITuristicImpl {
 	//tal data é colocada num map<data,boolean> dentro do objeto ponto 
 	//turistico.
 	public void getDaysAvailableForAttraction(PontoTuristico attraction, Date date, int numberOfPeople){
-	
+		
 	}
 	
 	public void removeAttractionsNotAvailable(List<PontoTuristico> attractions){
