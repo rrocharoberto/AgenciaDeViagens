@@ -40,12 +40,12 @@ public class Pacote implements java.io.Serializable {
 	private Date dataFim;
 	private int quantidadePessoas;
 	private Set<HotelReserva> hotelReservas = new HashSet<HotelReserva>(0);
-	private Set<RestauranteReserva> restauranteReservas = 
-			new HashSet<RestauranteReserva>(0);
+	private Set<RestauranteReserva> restauranteReservas = new HashSet<RestauranteReserva>(
+			0);
 	private Set<Pagamento> pagamentos = new HashSet<Pagamento>(0);
-	private Set<ReservaPontosTuristicos> reservaPontosTuristicoses = 
-			new HashSet<ReservaPontosTuristicos>(0);
-	
+	private Set<ReservaPontosTuristicos> reservaPontosTuristicoses = new HashSet<ReservaPontosTuristicos>(
+			0);
+
 	private Set<VooReserva> vooReservas = new HashSet<VooReserva>(0);
 
 	@Id
@@ -143,6 +143,93 @@ public class Pacote implements java.io.Serializable {
 
 	public void setVooReservas(Set<VooReserva> vooReservas) {
 		this.vooReservas = vooReservas;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
+		result = prime * result + ((dataFim == null) ? 0 : dataFim.hashCode());
+		result = prime * result
+				+ ((dataInicio == null) ? 0 : dataInicio.hashCode());
+		result = prime * result
+				+ ((hotelReservas == null) ? 0 : hotelReservas.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((pagamentos == null) ? 0 : pagamentos.hashCode());
+		result = prime * result + quantidadePessoas;
+		result = prime
+				* result
+				+ ((reservaPontosTuristicoses == null) ? 0
+						: reservaPontosTuristicoses.hashCode());
+		result = prime
+				* result
+				+ ((restauranteReservas == null) ? 0 : restauranteReservas
+						.hashCode());
+		result = prime * result
+				+ ((vooReservas == null) ? 0 : vooReservas.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pacote other = (Pacote) obj;
+		if (cidade == null) {
+			if (other.cidade != null)
+				return false;
+		} else if (!cidade.equals(other.cidade))
+			return false;
+		if (dataFim == null) {
+			if (other.dataFim != null)
+				return false;
+		} else if (!dataFim.equals(other.dataFim))
+			return false;
+		if (dataInicio == null) {
+			if (other.dataInicio != null)
+				return false;
+		} else if (!dataInicio.equals(other.dataInicio))
+			return false;
+		if (hotelReservas == null) {
+			if (other.hotelReservas != null)
+				return false;
+		} else if (!hotelReservas.equals(other.hotelReservas))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (pagamentos == null) {
+			if (other.pagamentos != null)
+				return false;
+		} else if (!pagamentos.equals(other.pagamentos))
+			return false;
+		if (quantidadePessoas != other.quantidadePessoas)
+			return false;
+		if (reservaPontosTuristicoses == null) {
+			if (other.reservaPontosTuristicoses != null)
+				return false;
+		} else if (!reservaPontosTuristicoses
+				.equals(other.reservaPontosTuristicoses))
+			return false;
+		if (restauranteReservas == null) {
+			if (other.restauranteReservas != null)
+				return false;
+		} else if (!restauranteReservas.equals(other.restauranteReservas))
+			return false;
+		if (vooReservas == null) {
+			if (other.vooReservas != null)
+				return false;
+		} else if (!vooReservas.equals(other.vooReservas))
+			return false;
+		return true;
 	}
 
 }
