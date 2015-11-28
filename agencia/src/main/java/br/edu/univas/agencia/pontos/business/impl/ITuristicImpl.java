@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import util.HibernateUtil;
+import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
 import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
@@ -24,7 +25,13 @@ public class ITuristicImpl {
 		
 		//Get all attractions of the given city
 		List<PontoTuristico> attractionsOfTheCity = null;
-		attractionsOfTheCity = ptDAO.getAttractionsByCity(pacote.getCidade());
+
+		//TODO: Retirar
+		Cidade cidade = new Cidade();
+		cidade.setId(6861);
+		
+		attractionsOfTheCity = ptDAO.getAttractionsByCity(cidade);
+		//attractionsOfTheCity = ptDAO.getAttractionsByCity(pacote.getCidade());
 		
 		//Get all days of the given period.
 		getDaysOfPeriod(pacote,daysBetweenPeriod);
