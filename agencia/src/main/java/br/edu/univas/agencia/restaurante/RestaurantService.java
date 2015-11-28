@@ -21,9 +21,10 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
-        } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
-        }
+        } catch (NullPointerException e) {
+            new AgencyException("Não há nenhum restaurante para inserir");
+        } 
+        
         
         return null;
     }
@@ -35,7 +36,7 @@ public class RestaurantService implements IRestaurant {
         try {
             
         } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
+            new AgencyException("Houve uma falha ao alterar o restaurante");
         }
     }
 
@@ -46,7 +47,7 @@ public class RestaurantService implements IRestaurant {
         try {
             
         } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
+            new AgencyException("Houve uma falha ao deletar o restaurante");
         }
     }
 
@@ -57,7 +58,7 @@ public class RestaurantService implements IRestaurant {
         try {
             
         } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
+            new AgencyException("Houve uma falha ao buscar o restaurante");
         }
         return null;
     }
@@ -69,7 +70,7 @@ public class RestaurantService implements IRestaurant {
         try {
             
         } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
+            new AgencyException("Houve uma falha ao buscar os restaurantes");
         }
         return null;
     }
@@ -81,7 +82,7 @@ public class RestaurantService implements IRestaurant {
         try {
             
         } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
+            new AgencyException("Houve uma falha ao buscar os restaurantes");
         }
         return null;
     }
@@ -93,7 +94,7 @@ public class RestaurantService implements IRestaurant {
         try {
             
         } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
+            new AgencyException("Houve uma falha ao criar a reserva");
         }
     }
 
@@ -104,7 +105,7 @@ public class RestaurantService implements IRestaurant {
         try {
             
         } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
+            new AgencyException("Houve uma falha ao remover a reserva");
         }
     }
 
@@ -115,7 +116,7 @@ public class RestaurantService implements IRestaurant {
         try {
             
         } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
+            new AgencyException("Houve uma falha ao buscar esta reserva");
         }
         return null;
     }
@@ -127,7 +128,7 @@ public class RestaurantService implements IRestaurant {
         try {
             
         } catch (Exception e) {
-            new AgencyException("Houve uma falha ao inserir o restaurante");
+            new AgencyException("Houve uma falha ao buscar as reservas");
         }
         return null;
     }
