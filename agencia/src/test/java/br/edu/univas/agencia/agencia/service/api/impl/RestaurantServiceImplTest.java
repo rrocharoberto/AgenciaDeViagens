@@ -90,4 +90,12 @@ public class RestaurantServiceImplTest {
 		BDDMockito.verifyNoMoreInteractions(packageBusiness, restaurantBusiness);
 		assertThat(caughtException(), instanceOf(AgencyException.class));
 	}
+	
+	private Collection<Restaurante> buildRestaurants(){
+		Collection<Restaurante> expectedRestaurants = new ArrayList<Restaurante>();
+		Restaurante restaurante = new Restaurante();
+		restaurante.setNome("Villa");
+		expectedRestaurants.add(restaurante);
+		return expectedRestaurants;
+	}
 }
