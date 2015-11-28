@@ -40,6 +40,21 @@
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>
+  
+  <servlet>
+      <servlet-name>Restaurant</servlet-name>
+      <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+      <init-param>
+          <param-name>com.sun.jersey.config.property.packages</param-name>
+          <param-value>br.edu.univas.agencia.restaurante</param-value>
+      </init-param>
+      <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>Restaurant</servlet-name>
+      <url-pattern>/api/restaurant/*</url-pattern>
+  </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>AgenciaViagens</servlet-name>
     <url-pattern>/apiAgency/*</url-pattern>
