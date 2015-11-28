@@ -21,6 +21,8 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
+            repository.create(restaurant);
+            
         } catch (NullPointerException e) {
             new AgencyException("Não há nenhum restaurante para inserir");
         } 
@@ -35,8 +37,10 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
-        } catch (Exception e) {
-            new AgencyException("Houve uma falha ao alterar o restaurante");
+           repository.update(restaurant); 
+            
+        } catch (NullPointerException e) {
+            new AgencyException("Não há restaurante para alterar");
         }
     }
 
@@ -45,6 +49,8 @@ public class RestaurantService implements IRestaurant {
         repository = new RestaurantRepository();
         
         try {
+            
+            
             
         } catch (Exception e) {
             new AgencyException("Houve uma falha ao deletar o restaurante");
@@ -57,8 +63,10 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
-        } catch (Exception e) {
-            new AgencyException("Houve uma falha ao buscar o restaurante");
+            repository.getById(restaurantId);
+            
+        } catch (NullPointerException e) {
+            new AgencyException("Não foi possível localizar o restaurante");
         }
         return null;
     }
@@ -69,8 +77,10 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
-        } catch (Exception e) {
-            new AgencyException("Houve uma falha ao buscar os restaurantes");
+            repository.getAll();
+            
+        } catch (NullPointerException e) {
+            new AgencyException("Não foi possível listar nenhum restaurante");
         }
         return null;
     }
@@ -80,6 +90,8 @@ public class RestaurantService implements IRestaurant {
         repository = new RestaurantRepository();
         
         try {
+            
+            repository.getRestaurantsAvailable(bundle);
             
         } catch (Exception e) {
             new AgencyException("Houve uma falha ao buscar os restaurantes");
