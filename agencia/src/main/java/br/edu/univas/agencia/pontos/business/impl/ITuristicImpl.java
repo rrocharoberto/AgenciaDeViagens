@@ -17,6 +17,7 @@ import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
 
 public class ITuristicImpl {
 	
+	//Apenas de teste
 	private PontosTuristicosDAO ptDAO;
 	
 	public ITuristicImpl(){
@@ -35,6 +36,7 @@ public class ITuristicImpl {
 		cidade.setId(6861);
 		
 		attractionsOfTheCity = ptDAO.getAttractionsByCity(cidade);
+		//Apenas teste
 =======
 		attractionsOfTheCity = ptDAO.getAttractionsByCity(pacote.getCidade());
 >>>>>>> 0f3eced70caae5dace6ec62956cdccf3dfb303a3
