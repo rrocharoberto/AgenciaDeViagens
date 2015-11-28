@@ -7,17 +7,13 @@ import java.util.Date;
 import java.util.List;
 
 import util.HibernateUtil;
-<<<<<<< HEAD
 import br.edu.univas.agencia.model.Cidade;
-=======
->>>>>>> 0f3eced70caae5dace6ec62956cdccf3dfb303a3
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
 import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
 
 public class ITuristicImpl {
 	
-	//Apenas de teste
 	private PontosTuristicosDAO ptDAO;
 	
 	public ITuristicImpl(){
@@ -29,17 +25,13 @@ public class ITuristicImpl {
 		
 		//Get all attractions of the given city
 		List<PontoTuristico> attractionsOfTheCity = null;
-<<<<<<< HEAD
 
 		//TODO: Retirar
 		Cidade cidade = new Cidade();
 		cidade.setId(6861);
 		
 		attractionsOfTheCity = ptDAO.getAttractionsByCity(cidade);
-		//Apenas teste
-=======
-		attractionsOfTheCity = ptDAO.getAttractionsByCity(pacote.getCidade());
->>>>>>> 0f3eced70caae5dace6ec62956cdccf3dfb303a3
+		//attractionsOfTheCity = ptDAO.getAttractionsByCity(pacote.getCidade());
 		
 		//Get all days of the given period.
 		getDaysOfPeriod(pacote,daysBetweenPeriod);
@@ -73,15 +65,6 @@ public class ITuristicImpl {
 	}
 
 	
-<<<<<<< HEAD
-	//Checar se na tabela de reserva de cada ponto turÃ­stico, para cada dia, 
-	//o nÃºmero total de reservas + o nÃºmero de pessoa do pacote Ã© menor 
-	//ou igual ao nÃºmero de vagas daquele ponto turÃ­stico. Se for, entÃ£o
-	//tal data Ã© colocada num map<data,boolean> dentro do objeto ponto 
-	//turistico.
-	public void getDaysAvailableForAttraction(PontoTuristico attraction, Date date, int numberOfPeople){
-		
-=======
 	//Checar se na tabela de reserva de cada ponto turístico, para cada dia, 
 	//o número total de reservas + o número de pessoa do pacote é menor 
 	//ou igual ao número de vagas daquele ponto turístico. Se for, então
@@ -89,7 +72,6 @@ public class ITuristicImpl {
 	//turistico.
 	public void getDaysAvailableForAttraction(PontoTuristico attraction, Date date, int numberOfPeople){
 	
->>>>>>> 0f3eced70caae5dace6ec62956cdccf3dfb303a3
 	}
 	
 	public void removeAttractionsNotAvailable(List<PontoTuristico> attractions){
