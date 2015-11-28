@@ -12,9 +12,9 @@ import java.util.List;
 
 public interface IRestaurantRepository {
     
-    public Restaurante create(Restaurante restaurante) throws AgencyException;
+    public void create(Restaurante restaurante) throws AgencyException;
 
-    public Restaurante update(Restaurante restaurante) throws AgencyException;
+    public void update(Restaurante restaurante) throws AgencyException;
 
     public Restaurante getById(int id) throws AgencyException;
 

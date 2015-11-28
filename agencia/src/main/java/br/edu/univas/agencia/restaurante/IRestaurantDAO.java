@@ -7,23 +7,19 @@ package br.edu.univas.agencia.restaurante;
 
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Restaurante;
-import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 public interface IRestaurantDAO {
     
-    public void setConnection(Connection connection);
-
-    public int create(Restaurante restaurante) throws AgencyException;
-
-    public void update(Restaurante restaurante) throws AgencyException;
-
-    public void delete(Restaurante restaurante) throws AgencyException;
-
-    public Restaurante getById(int id) throws AgencyException;
-
-    public List<Restaurante> getAll() throws AgencyException;
-
-    public List<Restaurante> getRestaurantsAvailable(int reservations) throws AgencyException;
+    public void save(Restaurante entity);
+    
+    public void update(Restaurante entity);
+    
+    public Restaurante getById(int id);
+    
+    public List<Restaurante> getAll();
+    
+    public List<Restaurante> getRestaurantsAvailable(Date inicio, Date fim, int idCidade) throws AgencyException;
     
 }
