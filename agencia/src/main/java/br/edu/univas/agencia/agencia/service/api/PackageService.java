@@ -14,6 +14,7 @@ public interface PackageService {
 
 	/**
 	 * Get list of packages concluded.
+	 * 
 	 * @return
 	 * @throws AgencyException
 	 */
@@ -21,6 +22,7 @@ public interface PackageService {
 
 	/**
 	 * Create package.
+	 * 
 	 * @param pacote
 	 * @throws AgencyException
 	 */

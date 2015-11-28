@@ -64,10 +64,10 @@ public class ITuristicImpl {
 	}
 
 	
-	//Checar se na tabela de reserva de cada ponto turístico, para cada dia, 
-	//o número total de reservas + o número de pessoa do pacote é menor 
-	//ou igual ao número de vagas daquele ponto turístico. Se for, então
-	//tal data é colocada num map<data,boolean> dentro do objeto ponto 
+	//Checar se na tabela de reserva de cada ponto turÃ­stico, para cada dia, 
+	//o nÃºmero total de reservas + o nÃºmero de pessoa do pacote Ã© menor 
+	//ou igual ao nÃºmero de vagas daquele ponto turÃ­stico. Se for, entÃ£o
+	//tal data Ã© colocada num map<data,boolean> dentro do objeto ponto 
 	//turistico.
 	public void getDaysAvailableForAttraction(PontoTuristico attraction, Date date, int numberOfPeople){
 		

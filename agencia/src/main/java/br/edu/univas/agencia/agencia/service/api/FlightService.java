@@ -23,7 +23,7 @@ public interface FlightService {
 	 * @return the list of the flight types ("Economic", "Executive", ...)
 	 * @throws AgencyException
 	 */
-	List<Integer> listFlightTypes(Pacote pacote) throws AgencyException;
+	List<Integer> listFlightTypes(int packageId) throws AgencyException;
 
 	/**
 	 * 
@@ -33,8 +33,7 @@ public interface FlightService {
 	 * 
 	 * @throws AgencyException
 	 */
-	Map<String, Collection<Voo>> listFlights(Pacote pacote)
-			throws AgencyException;
+	Collection<Voo> listFlights(int packageId) throws AgencyException;
 
 	/**
 	 * 
@@ -42,6 +41,5 @@ public interface FlightService {
 	 * @param vooReserva
 	 * @throws AgencyException
 	 */
-	void createFlightReservation(Pacote pacote, VooReserva vooReserva)
-			throws AgencyException;
+	void createFlightReservation(VooReserva vooReserva) throws AgencyException;
 }

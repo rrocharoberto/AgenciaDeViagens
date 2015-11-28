@@ -1,0 +1,24 @@
+<section>
+    <form ng-submit="savePackage()">
+        Tipo de voo:
+        <select ng-model="flightReservation.tipoVoo" ng-options="type as type for type in flightTypes">
+        </select>
+
+        Cidade de Origem:
+        <select ng-model="flightReservation.cidadeByCidadeOrigemId" ng-options="city as city.nome for city in cities">
+        </select>
+
+        Cidade de Destino:
+        <select ng-model="flightReservation.cidadeByCidadeDestinoId" ng-options="city as city.nome for city in cities">
+        </select>
+
+        Data de ida:
+        <input type="date" ng-model="flightReservation.dataEmbarque" />
+
+        Voo:
+        <select ng-model="flightReservation.voo" ng-options="voo as voo.nomeCompania for voo in flights">
+        </select>
+
+        <input type="submit" value="Salvar">
+    </form>
+</section>

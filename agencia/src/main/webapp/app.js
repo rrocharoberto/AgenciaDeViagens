@@ -1,5 +1,6 @@
 var app = angular.module('AgencyApp', [
-	'ngRoute'
+	'ngRoute',
+	'toastr'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -8,12 +9,27 @@ app.config(['$routeProvider', function($routeProvider) {
 			controller: 'IndexController',
 			templateUrl: 'views/index.html'
 		}).
-		when('/city', {
-			controller : 'CityController',
-			templateUrl: 'views/index.html'
+		when('/create-package', {
+			controller : 'CreatePackageController',
+			templateUrl: 'views/create-package.html'
 		}).
-		otherwise( {redirectTo: '/'});
+		when('/flight', {
+			controller: 'FlightController',
+			templateUrl: 'views/create-package-flight.html'
+		}).
+		when('/hotel', {
+			controller: 'HotelController',
+			templateUrl: 'views/create-package-hotel.html'
+		}).
+		when('/restaurant', {
+			controller: 'RestaurantController',
+			templateUrl: 'views/create-package-restaurant.html'
+		}).
+		when('/atractions', {
+			controller: 'AtractionsController',
+			templateUrl: 'views/create-package-atractions.html'
+		});
 }]);
 
 // Define a constant to connect with web service
-app.value('URL', 'http://localhost:8080/agencia/api');
+app.value('URL', 'http://localhost:8080/agencia/apiAgency');

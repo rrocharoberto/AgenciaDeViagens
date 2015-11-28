@@ -22,11 +22,17 @@ import javax.persistence.Table;
 @Table(name = "hotel", catalog = "agencia")
 public class Hotel implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Cidade cidade;
 	private String nome;
 	private float valor;
 	private int numeroVagas;
+	private boolean isActive;
+
 	private Set<HotelReserva> hotelReservas = new HashSet<HotelReserva>(0);
 
 	public Hotel() {
@@ -94,6 +100,14 @@ public class Hotel implements java.io.Serializable {
 
 	public void setNumeroVagas(int numeroVagas) {
 		this.numeroVagas = numeroVagas;
+	}
+	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
