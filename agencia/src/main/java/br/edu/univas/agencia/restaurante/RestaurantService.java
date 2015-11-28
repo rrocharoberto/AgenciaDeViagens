@@ -12,13 +12,20 @@ import java.util.List;
  */
 public class RestaurantService implements IRestaurant {
     
+    
+    private RestaurantRepository repository;
+
     /**
-     * Criando objeto da classe RestaurtRespository.
+     * Create construtor and initialize variables necessary for the operation of the class
      */
-    private RestaurantRepository repository = new RestaurantRepository();
+    public RestaurantService() {
+        repository = new RestaurantRepository();
+    }
+    
+    
     
     /**
-     * Método responsável por criar restaurantes. 
+     * Method responsible for saving the restaurant 
      */
     @Override
     public Restaurante createRestaurant(Restaurante restaurant) throws AgencyException {
@@ -35,6 +42,11 @@ public class RestaurantService implements IRestaurant {
         return null;
     }
 
+    /**
+     * Method resposible for for updating the restaurant
+     * @param restaurant
+     * @throws AgencyException 
+     */
     @Override
     public void updateRestaurant(Restaurante restaurant) throws AgencyException {
         
@@ -59,6 +71,12 @@ public class RestaurantService implements IRestaurant {
         }
     }
 
+    /**
+     * method responsible for seeking a restaurant by id
+     * @param restaurantId
+     * @return
+     * @throws AgencyException 
+     */
     @Override
     public Restaurante getRestauranteById(Integer restaurantId) throws AgencyException {
         
@@ -72,6 +90,11 @@ public class RestaurantService implements IRestaurant {
         return null;
     }
 
+    /**
+     * method responsible for fetching all restaurants
+     * @return
+     * @throws AgencyException 
+     */
     @Override
     public List<Restaurante> getRestaurantAll() throws AgencyException {
         
@@ -85,6 +108,12 @@ public class RestaurantService implements IRestaurant {
         return null;
     }
 
+    /**
+     * Method that behind all the restaurants and made ​​reservations
+     * @param bundle
+     * @return
+     * @throws AgencyException 
+     */
     @Override
     public List<Restaurante> getAvailableRestaurantList(Pacote bundle) throws AgencyException {
         
