@@ -124,6 +124,7 @@ CREATE TABLE IF NOT EXISTS `agencia`.`hotel` (
   `valor` FLOAT NOT NULL COMMENT '',
   `numero_vagas` INT NOT NULL COMMENT '',
   `cidade_id` INT NOT NULL COMMENT '',
+  `active` BOOLEAN NOT NULL COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '',
   INDEX `fk_hotel_cidade1_idx` (`cidade_id` ASC)  COMMENT '',
   CONSTRAINT `fk_hotel_cidade1`
