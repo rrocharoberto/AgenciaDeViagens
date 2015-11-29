@@ -3,6 +3,7 @@ package br.edu.univas.agencia.hotel;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import br.edu.univas.agencia.model.Hotel;
 
@@ -11,7 +12,7 @@ public class HotelDAO extends GenericHotelDAO<Hotel, Integer> {
 	public HotelDAO(EntityManager em) {
 		super(em);
 	}
-
+	
 	public float getHotelPrice(Hotel hotel) {
 		float valor = hotel.getValor();
 		return valor;

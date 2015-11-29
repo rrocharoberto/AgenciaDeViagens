@@ -9,11 +9,11 @@ import br.edu.univas.agencia.model.Pacote;
 
 public interface IHotel {
 
-	public Hotel createHotel(Hotel hotel) throws AgencyException;
+	public void createHotel(Hotel hotel) throws AgencyException;
 	
-	public Hotel updateHotel(Hotel hotel) throws AgencyException;
+	public void updateHotel(Hotel hotel) throws AgencyException;
 	
-	public Hotel deleteHotel(Integer hotelID) throws AgencyException;
+	public void deleteHotel(Integer hotelID) throws AgencyException;
 	
     public List<Hotel> getAllHotel() throws AgencyException;
 	

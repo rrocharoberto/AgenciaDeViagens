@@ -30,7 +30,7 @@ abstract class GenericHotelDAO <T, PK> {
 		em.getTransaction().commit();
 	}
 
-	public void deleteCargo(T entity) {
+	public void delete(T entity) {
 
 		em.getTransaction().begin();
 
@@ -48,7 +48,7 @@ abstract class GenericHotelDAO <T, PK> {
 
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
-		Query q = em.createQuery("from" + getTypeClass().getName(),
+		Query q = em.createQuery("from " + getTypeClass().getName(),
 				getTypeClass());
 		return q.getResultList();
 	}

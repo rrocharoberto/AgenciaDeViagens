@@ -1,16 +1,17 @@
 <div id="hotelRegisterModal" class="modal">
 	<div class="modal-content">
-		<h4>Cadastro de Hotel</h4>
+		<h4 id="modal-head"></h4>
 		<div class="row">
 			<form id="hotelRegisterForm" method="POST" class="col s12">
 				<div class="row">
 					<div class="input-field col s8">
+						<input id="hotel_id" type="text" style="display: none;"> 
 						<input id="hotel_name" type="text" class="validate" maxlength="50" required> 
-						<label for="hotel_name">Nome</label>
+						<label id="hotel_name_label" for="hotel_name">Nome</label>
 					</div>
 					<div class="input-field col s4">
 						<input id="hotel_daily_value" type="text" class="validate" maxlength="11" required>
-						<label for="hotel_daily_value">Valor da diaria</label>
+						<label id="hotel_daily_value_label" for="hotel_daily_value">Valor da diaria</label>
 					</div>
 				</div>
 				<div class="row">
@@ -25,7 +26,7 @@
 					</div>
 					<div class="input-field col s4">
 						<input id="hotel_rooms" type="text" class="validate" maxlength="3" required>
-						<label for="hotel_rooms">Num. de quartos</label>
+						<label id="hotel_rooms_label" for="hotel_rooms">Num. de quartos</label>
 					</div>
 				</div>
 				<div class="row">
@@ -36,10 +37,8 @@
 				</div>
 				<div class="row">
 					<div class="col s12">
-						<button type="submit"
-							class=" right modal-action waves-effect waves-green btn-flat">Salvar</button>
-						<a href="#!"
-							class=" right modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+						<button type="submit" class="right modal-action waves-effect waves-green btn-flat">Salvar</button>
+						<a href="#!" class="right modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
 					</div>
 				</div>
 			</form>

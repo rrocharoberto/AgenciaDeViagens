@@ -7,9 +7,8 @@ var RegisterModalController = (function(){
 	
 	setEvents = function(){
 		$('select').material_select();
-		$("#hotel_daily_value").maskMoney({symbol:'R$ ', 
-				showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
-
+		$("#hotel_daily_value").maskMoney({ symbol:'R$ ', showSymbol:true, thousands:'.', 
+											decimal:',', symbolStay: true});
 	};
 	
 	handleOnFormSubmit = function(){
@@ -19,24 +18,32 @@ var RegisterModalController = (function(){
 				var value = $('#hotel_daily_value').val();
 				
 		        var formData = {
+		        		'id' : $("#hotel_id").val(),
 		                'name' : $('#hotel_name').val(),
-		                'value' : formatDaialyValue(value.substr(2)),
+		                'value' : formatValue(value.substr(2)),
 		                'city': $('#hotel_city').val(),
 		                'rooms': $('#hotel_rooms').val(),
 		                'isActive': $('#hotel_isActive').is(":checked") ? true : false
 		         };
 		        
+		        var url = ($("#modal-head").text() == "Cadastro de Hotel") ? 'http://localhost:8080/agencia/api/hotel/root/create' 
+		        														   : 'http://localhost:8080/agencia/api/hotel/root/edit';
+		        
 		        $.ajax({
 		        	type: 'POST',
-		        	url: 'http://localhost:8080/agencia/api/hotel/root/create',
+		        	url: url,
 		        	data: formData,
 		        	dataType : 'json',
 		        	contentType: 'application/json',
 		        	success: function(result){
-		        		
+		        		swal("Sucesso!", result.responseText, "success");
+		        		$("#hotelRegisterModal").closeModal();
+		        		Features.refreshTable();
 		        	}, 
 		        	error: function(result){
-		        		
+		        		Features.refreshTable();
+		        		swal("Erro!", result.responseText, "error");
+		        		$("#hotelRegisterModal").closeModal();
 		        	}
 		        });
 				event.preventDefault();
@@ -44,7 +51,7 @@ var RegisterModalController = (function(){
 		});
 	};
 	
-	formatDaialyValue = function(value){
+	formatValue = function(value){
 		if(value === ""){
 			 return "0";
 	      }else{
