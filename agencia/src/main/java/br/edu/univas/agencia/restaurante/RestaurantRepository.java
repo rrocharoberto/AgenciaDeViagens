@@ -3,6 +3,7 @@ package br.edu.univas.agencia.restaurante;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.Restaurante;
+import br.edu.univas.agencia.model.RestauranteReserva;
 import java.util.List;
 import javax.persistence.EntityManager;
 import util.HibernateUtil;
@@ -13,6 +14,7 @@ import util.HibernateUtil;
 public class RestaurantRepository implements IRestaurantRepository{
 
     private IRestaurantDAO restaurantDAO;
+    private IRestaurantReservationDAO restaurantReservationDAO;
     private EntityManager entityManager;
     
     /**
@@ -21,6 +23,7 @@ public class RestaurantRepository implements IRestaurantRepository{
     public RestaurantRepository() {
         entityManager = HibernateUtil.getEntityManager();
         restaurantDAO = new RestaurantDAO(entityManager);
+        restaurantReservationDAO = new RestaurantReservationDAO(entityManager);
     }
     /**
      * Method responsible for saving the entity
@@ -28,7 +31,7 @@ public class RestaurantRepository implements IRestaurantRepository{
      * @throws AgencyException 
      */
     @Override
-    public void create(Restaurante restaurante) throws AgencyException {
+    public void createRestaurant(Restaurante restaurante) throws AgencyException {
         restaurantDAO.save(restaurante);
     }
 
@@ -38,7 +41,7 @@ public class RestaurantRepository implements IRestaurantRepository{
      * @throws AgencyException 
      */
     @Override
-    public void update(Restaurante restaurante) throws AgencyException {
+    public void updateRestaurant(Restaurante restaurante) throws AgencyException {
         restaurantDAO.update(restaurante);        
     }
 
@@ -72,6 +75,16 @@ public class RestaurantRepository implements IRestaurantRepository{
     @Override
     public List<Restaurante> getRestaurantsAvailable(Pacote pacote) throws AgencyException {
         return restaurantDAO.getRestaurantsAvailable(pacote.getDataInicio(), pacote.getDataFim(), pacote.getCidade().getId());
+    }
+
+    @Override
+    public void createRestaurantReservation(RestauranteReserva restauranteReserva) throws AgencyException {
+        restaurantReservationDAO.save(restauranteReserva);
+    }
+
+    @Override
+    public void updateRestaurantReservation(RestauranteReserva restauranteReserva) throws AgencyException {
+        restaurantReservationDAO.update(restauranteReserva);
     }
 
 }
