@@ -3,14 +3,46 @@
     <head>
         <meta charset="UTF-8">
         <title>Agência | Restaurante</title>
+
+        <!--Materialize-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="../css/materialize/css/materialize.min.css" rel="stylesheet">
+
+        <link href="css/style.css" rel="stylesheet">
+
     </head>
     <body>
-        <div ng-view=""></div>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#/" class="brand-logo right logo">Módulo de Restaurante</a>
+                <a href="#" data-activates="mobile" class="button-collapse logo"><i class="material-icons">menu</i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="#/">Início</a></li>
+                    <li><a href="#/register">Restaurantes</a></li>
+                    <li><a href="#/report">Relatórios</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile">
+                    <li><a href="#/">Início</a></li>
+                    <li><a href="#/register">Restaurantes</a></li>
+                    <li><a href="#/report">Relatórios</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="container" ng-view="">
+        </div>
+
+        <!--JQuery-->
+        <script type="text/javascript" src="../bower_components/jquery/jquery.min.js"></script>
 
         <!--AngularJS-->
         <script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="../bower_components/angular-route/angular-route.min.js"></script>
         <script type="text/javascript" src="../bower_components/angular-resource/angular-resource.min.js"></script>
+
+        <!--Materialize-->
+        <script type="text/javascript" src="../css/materialize/js/materialize.min.js"></script>
 
         <!--Restaurant Module-->
         <script type="text/javascript" src="js/restaurantModule.js"></script>

@@ -7,7 +7,7 @@ window.angular.module('restaurantModule').config(['$routeProvider', function ($r
                     controller: 'homeCtrl',
                     templateUrl: 'templates/_home.html'
                 }).
-                when('/register/:restaurantId', {
+                when('/register', {
                     controller: 'registerCtrl',
                     templateUrl: 'templates/_register.html'
                 }).
@@ -20,3 +20,5 @@ window.angular.module('restaurantModule').config(['$routeProvider', function ($r
                 });
 
     }]);
+
+$(".button-collapse").sideNav();
