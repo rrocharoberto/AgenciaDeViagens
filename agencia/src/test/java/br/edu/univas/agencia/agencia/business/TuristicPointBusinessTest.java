@@ -56,7 +56,7 @@ public class TuristicPointBusinessTest {
 	public void shouldListTuristicPoints() throws AgencyException, ParseException {
 		// given
 		List<PontoTuristico> pontos = new ArrayList<PontoTuristico>();
-		given(packageBusiness.retrivePackage(PACKAGE_ID)).willReturn(pacote);
+		given(packageBusiness.retrievePackage(PACKAGE_ID)).willReturn(pacote);
 		given(ituristicImpl.getAvailableAttractions(pacote)).willReturn(pontos);
 		
 		// when
@@ -69,13 +69,13 @@ public class TuristicPointBusinessTest {
 	@Test
 	public void shouldThrowAgencyExceptionAtRetrieve() throws AgencyException, ParseException {
 		// given
-		given(packageBusiness.retrivePackage(PACKAGE_ID)).willThrow(agencyException);
+		given(packageBusiness.retrievePackage(PACKAGE_ID)).willThrow(agencyException);
 
 		// when
 		catchException(turisticPointBusiness).listTuristicPoints(PACKAGE_ID);
 
 		// then
-		verify(packageBusiness).retrivePackage(PACKAGE_ID);
+		verify(packageBusiness).retrievePackage(PACKAGE_ID);
 		verifyNoMoreInteractions(packageBusiness, ituristicImpl);
 		assertThat(caughtException(), instanceOf(AgencyException.class));
 	}
@@ -83,13 +83,13 @@ public class TuristicPointBusinessTest {
 	@Test
 	public void shouldThrowAgencyExceptionAtListAtractions() throws AgencyException, ParseException {
 		// given
-		given(packageBusiness.retrivePackage(PACKAGE_ID)).willReturn(pacote);
+		given(packageBusiness.retrievePackage(PACKAGE_ID)).willReturn(pacote);
 		given(ituristicImpl.getAvailableAttractions(pacote)).willThrow(agencyException);
 		// when
 		catchException(turisticPointBusiness).listTuristicPoints(PACKAGE_ID);
 
 		// then
-		verify(packageBusiness).retrivePackage(PACKAGE_ID);
+		verify(packageBusiness).retrievePackage(PACKAGE_ID);
 		verify(ituristicImpl).getAvailableAttractions(pacote);
 		verifyNoMoreInteractions(packageBusiness, ituristicImpl);
 		assertThat(caughtException(), instanceOf(AgencyException.class));

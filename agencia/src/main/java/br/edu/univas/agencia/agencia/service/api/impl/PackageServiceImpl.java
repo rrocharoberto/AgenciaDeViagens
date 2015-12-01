@@ -5,9 +5,8 @@ import java.util.Collection;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 
+import br.edu.univas.agencia.agencia.business.PackageBusiness;
 import br.edu.univas.agencia.agencia.service.api.PackageService;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Pacote;
@@ -20,18 +19,19 @@ import br.edu.univas.agencia.model.Pacote;
 @Path("/package")
 public class PackageServiceImpl implements PackageService {
 
+	private PackageBusiness packageBusiness = new PackageBusiness();
+	
 	@GET
 	@Override
 	public Collection<Pacote> listPackages() throws AgencyException {
-		//TODO  return packageBusiness.listPackages();
-		return null;
+		return packageBusiness.listPackages();
 	}
 
 	@POST
 	@Override
-	public void createPackage(Pacote pacote) throws AgencyException {
-		// TODO packageValidator.createPackage();
-		// TODO packageBusiness.createPackage();
+	public Pacote createPackage(Pacote pacote) throws AgencyException {
+		packageBusiness.createPackage(pacote);
+		return pacote;
 	}
 
 }

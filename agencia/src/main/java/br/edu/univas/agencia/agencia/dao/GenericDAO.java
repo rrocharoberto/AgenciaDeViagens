@@ -8,6 +8,10 @@ import javax.persistence.Query;
 
 public class GenericDAO<T, Integer> {
 
+	public void save(T object, EntityManager em) {
+		em.persist(object);
+	}
+
 	public T getById(Integer id, EntityManager em) {
 		T entity = (T) em.find(getTypeClass(), id);
 		return entity;

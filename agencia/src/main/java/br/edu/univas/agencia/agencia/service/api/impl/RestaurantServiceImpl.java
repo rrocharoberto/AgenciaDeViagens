@@ -32,7 +32,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public Collection<Restaurante> listRestaurants(
 			@QueryParam("packageId") int packageId) throws AgencyException {
 
-		Pacote pacote = packageBusiness.retrivePackage(packageId);
+		Pacote pacote = packageBusiness.retrievePackage(packageId);
 		return restaurantBusiness.listRestaurants(pacote);
 	}
 
@@ -41,9 +41,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public void createRestaurantReservation(
 			RestauranteReserva restauranteReserva) throws AgencyException {
-		// TODO packageValidator.validatePackage();
-		// TODO restaurantBusiness.validateReservation();
-		// TODO restaurantBusiness.createRestaurantReservation();
+		restaurantBusiness.createReservation(restauranteReserva);
 
 	}
 

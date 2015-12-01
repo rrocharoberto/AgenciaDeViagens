@@ -26,5 +26,5 @@ public interface PackageService {
 	 * @param pacote
 	 * @throws AgencyException
 	 */
-	void createPackage(Pacote pacote) throws AgencyException;
+	Pacote createPackage(Pacote pacote) throws AgencyException;
 }

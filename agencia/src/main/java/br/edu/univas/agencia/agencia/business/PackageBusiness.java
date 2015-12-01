@@ -1,5 +1,7 @@
 package br.edu.univas.agencia.agencia.business;
 
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 
 import util.HibernateUtil;
@@ -17,8 +19,16 @@ public class PackageBusiness {
 		this.entityManager = HibernateUtil.getEntityManager();
 	}
 
-	public Pacote retrivePackage(int packageId) throws AgencyException {
+	public Pacote retrievePackage(int packageId) throws AgencyException {
 		return packageDAO.getById(packageId, entityManager);
+	}
+	
+	public void createPackage(Pacote pacote) throws AgencyException {
+		packageDAO.save(pacote, entityManager);
+	}
+	
+	public Collection<Pacote> listPackages() {
+		return packageDAO.getAll(entityManager);
 	}
 
 }

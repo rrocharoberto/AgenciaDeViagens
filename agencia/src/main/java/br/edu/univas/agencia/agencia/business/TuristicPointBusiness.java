@@ -20,12 +20,13 @@ public class TuristicPointBusiness {
 	}
 
 	public List<PontoTuristico> listTuristicPoints(int packageId) throws AgencyException, ParseException {
-		Pacote pacote = packageBusiness.retrivePackage(packageId);
+		Pacote pacote = packageBusiness.retrievePackage(packageId);
 		return ituristicImpl.getAvailableAttractions(pacote);
 	}
 
 	public void createTuristicPointReservation(
 			AtractionsReservation atractionsReservation) {
-		// TODO: Convert to list of Turistic points
+	
+		
 	}
 }

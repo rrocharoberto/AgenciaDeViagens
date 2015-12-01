@@ -54,7 +54,7 @@ public class PackageBusinessTest {
 		given(packageDAO.getById(PACKAGE_ID, ENTITY_MANAGER)).willReturn(pacote);
 		
 		// when
-		Pacote result = packageBusiness.retrivePackage(PACKAGE_ID);
+		Pacote result = packageBusiness.retrievePackage(PACKAGE_ID);
 		
 		// then
 		assertEquals(pacote, result);
@@ -67,7 +67,7 @@ public class PackageBusinessTest {
 		given(packageDAO.getById(PACKAGE_ID, ENTITY_MANAGER)).willThrow(agencyException);
 
 		// when
-		catchException(packageBusiness).retrivePackage(PACKAGE_ID);
+		catchException(packageBusiness).retrievePackage(PACKAGE_ID);
 
 		// then
 		verify(packageDAO).getById(PACKAGE_ID, ENTITY_MANAGER);

@@ -4,6 +4,9 @@ app.factory('PackageService', ['RESTServicePackage', function(RESTServicePackage
         createPackage : function(package) {
             return RESTServicePackage.createPackage(package);
         },
+        listPackages: function() {
+            return RESTServicePackage.listPackages();
+        },
         getPackage : function() {
             return package;
         },

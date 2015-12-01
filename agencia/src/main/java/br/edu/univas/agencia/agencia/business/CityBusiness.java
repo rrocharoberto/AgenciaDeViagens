@@ -1,11 +1,13 @@
 package br.edu.univas.agencia.agencia.business;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.EntityManager;
+
+import util.HibernateUtil;
+import br.edu.univas.agencia.agencia.dao.CityDAO;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Cidade;
-import br.edu.univas.agencia.model.Estado;
 
 /**
  * 
@@ -13,12 +15,17 @@ import br.edu.univas.agencia.model.Estado;
  *
  */
 public class CityBusiness {
-	
+
+	private final CityDAO cityDao;
+	private final EntityManager entityManager;
+
+	public CityBusiness() {
+		this.cityDao = new CityDAO();
+		this.entityManager = HibernateUtil.getEntityManager();
+	}
+
 	public Collection<Cidade> listCities() throws AgencyException {
-		Collection<Cidade> cities = new ArrayList<Cidade>();
-		cities.add(new Cidade(new Estado("MG", "Minas Gerais"), "Pouso Alegre"));
-		cities.add(new Cidade(new Estado("MG", "Minas Gerais"), "Borda da Mata"));
-		return cities;
+		return cityDao.getAll(entityManager);
 	}
 
 }
