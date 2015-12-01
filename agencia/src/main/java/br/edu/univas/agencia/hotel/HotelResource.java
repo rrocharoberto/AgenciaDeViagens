@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -21,13 +22,31 @@ import com.google.gson.reflect.TypeToken;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.Hotel;
+import br.edu.univas.agencia.model.Restaurante;
 
+
+/**
+ * 
+ * Class that provides resources RESTful to Hotel module.
+ *
+ */
 @Path("/root")
 public class HotelResource {
 	
 	private HotelService hotelService = new HotelService();
 	private Gson gson = new Gson();
 
+	/**
+	 * Redirect to the welcome page of the hotel system
+	 * 
+	 * URI = http://domain/agencia/api/hotel/root/home
+	 * 
+	 * Type = GET
+	 * 
+	 * @param res {@link HttpServletResponse}
+	 * 
+	 * @throws IOException
+	 */
 	@GET
 	@Path("/home")
 	@Produces({ MediaType.TEXT_PLAIN })
@@ -35,6 +54,17 @@ public class HotelResource {
 		res.sendRedirect("/agencia/Hotel/Views/Home/index.html");
 	}
 	
+	/**
+	 * Redirect to the register page of the hotel system
+	 * 
+	 * URI = http://domain/agencia/api/hotel/root/register
+	 * 
+	 * Type = GET
+	 * 
+	 * @param res {@link HttpServletResponse}
+	 * 
+	 * @throws IOException
+	 */
 	@GET
 	@Path("/register")
 	@Produces({ MediaType.TEXT_PLAIN })
@@ -42,6 +72,17 @@ public class HotelResource {
 		res.sendRedirect("/agencia/Hotel/Views/Register/index.html");
 	}
 	
+	/**
+	 * Redirect to the report page of the hotel system
+	 * 
+	 * URI = http://domain/agencia/api/hotel/root/report
+	 * 
+	 * Type = GET
+	 * 
+	 * @param res {@link HttpServletResponse}
+	 * 
+	 * @throws IOException
+	 */
 	@GET
 	@Path("/report")
 	@Produces({ MediaType.TEXT_PLAIN })
@@ -49,6 +90,23 @@ public class HotelResource {
 		res.sendRedirect("/agencia/Hotel/Views/Report/index.html");
 	}
 	
+	/**
+	 * Resource to create hotel register.
+     * 
+     * URI = http://domain/agencia/api/hotel/root/create
+     * 
+     * Type = POST
+	 * 
+	 * @param name {@link FormParam} = Hotel name
+	 * @param value {@link FormParam} = Hotel daily rate
+	 * @param city {@link FormParam} = Hotel city
+	 * @param rooms {@link FormParam} = Amount of hotel rooms
+	 * @param isActive {@link FormParam} (flag) = Check if the hotel is active
+	 * 
+	 * @return {@link String} Response message of the AJAX request
+	 * 
+	 * @throws Exception
+	 */
 	@POST
 	@Path("/create")
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -79,6 +137,17 @@ public class HotelResource {
 		}
 	}
 	
+	/**
+	 * Resource to get all registered hotels.
+     * 
+     * URI = http://domain/agencia/api/hotel/root/getAll
+     * 
+     * Type = GET
+	 * 
+	 * @return Object of type JSON converted to {@link String} with data of all hotels.
+	 * 
+	 * @throws Exception
+	 */
 	@GET
 	@Path("/getAll")
 	@Produces({ MediaType.TEXT_PLAIN })
@@ -94,12 +163,36 @@ public class HotelResource {
 		}
 	}
 	
+	/**
+	 * Resource that converts the {@link List<Hotel>} object to JSON object}.
+	 * 
+	 * @param hotelList {@link List<Hotel>}
+	 * 
+	 * @return Object of type JSON with all registered hotels
+	 */
 	public String hotelListToJson(List<Hotel> hotelList) {  
 	    GsonBuilder gsonBuilder = new GsonBuilder();
 	    Gson gson = gsonBuilder.registerTypeAdapter(Hotel.class, new HotelAdapter()).create();
 	    return gson.toJson(hotelList);
 	}
 	
+	/**
+	 * Resource to edit edit a registered hotel.
+     * 
+     * URI = http://domain/agencia/api/hotel/root/edit
+     * 
+     * Type = POST
+	 * 
+	 * @param id {@link FormParam} = Hotel database id
+	 * @param name {@link FormParam} = Hotel name
+	 * @param value {@link FormParam} = Hotel daily rate
+	 * @param city {@link FormParam} = Hotel city
+	 * @param rooms {@link FormParam} = Amount of hotel rooms
+	 * @param isActive {@link FormParam} (flag) = Check if the hotel is active
+	 * 
+	 * @return {@link String} Response message of the AJAX request
+	 * @throws Exception
+	 */
 	@POST
 	@Path("/edit")
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -132,6 +225,18 @@ public class HotelResource {
 		}
 	}
 	
+	/**
+	 * Resource to edit edit a registered hotel.
+     * 
+     * URI = http://domain/agencia/api/hotel/root/delete
+     * 
+     * Type = POST
+	 * 
+	 * @param id {@link FormParam} = Hotel database id
+	 * 
+	 * @return {@link String} Response message of the AJAX request
+	 * @throws Exception
+	 */
 	@POST
 	@Path("/delete")
 	@Consumes({ MediaType.APPLICATION_JSON })

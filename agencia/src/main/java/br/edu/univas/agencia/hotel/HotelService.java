@@ -11,11 +11,24 @@ import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Hotel;
 import br.edu.univas.agencia.model.HotelReserva;
 import br.edu.univas.agencia.model.Pacote;
+import br.edu.univas.agencia.restaurante.IRestaurant;
 
+/**
+ * This class is responsible by business logic of hotel.
+ * 
+ * @implements interface {@link IHotelService}
+ */
 public class HotelService implements  IHotelService{
 	
 	private HotelDAO dao;
-	
+		
+	/**
+	 * Method responsible for the hotel registration
+	 * 
+	 * @param hotel
+	 * 
+     * @throws AgencyException 
+	 */
 	@Override
 	public void createHotel(Hotel hotel) throws AgencyException {
 		try {
@@ -26,6 +39,13 @@ public class HotelService implements  IHotelService{
 		}
 	}
 
+	/**
+	 * Method responsible for updating of the registered hotel
+	 * 
+	 * @param hotel
+	 * 
+     * @throws AgencyException 
+	 */
 	@Override
 	public void updateHotel(Hotel hotel) throws AgencyException {
 		try {
@@ -36,6 +56,13 @@ public class HotelService implements  IHotelService{
 		}
 	}
 
+	/**
+	 * Method responsible to delete one registered hotel
+	 * 
+	 * @param {@link Integer} hotelID
+	 * 
+     * @throws AgencyException 
+	 */
 	@Override
 	public void deleteHotel(Integer hotelID) throws AgencyException {
 		try{
@@ -48,9 +75,15 @@ public class HotelService implements  IHotelService{
 		} catch (Exception ex) {
 			throw new AgencyException("Problemas ao deletar Hotel: " + ex.getMessage());
 		}
-	
 	}
 
+	/**
+	 * Method responsible to get all registered hotels
+	 * 
+	 * @return {@link List<Hotel>}
+	 * 
+     * @throws AgencyException  
+	 */
 	@Override
 	public List<Hotel> getAllHotel() throws AgencyException {
 		try {
@@ -61,15 +94,30 @@ public class HotelService implements  IHotelService{
 		}
 	}
 	
+	/**
+	 * Method responsible to reserve a room of hotel 
+	 * 
+	 * @param {@link HotelReserva} reserve
+	 * 
+	 * @throws AgencyException 
+	 */
 	@Override
 	public void reservRoom(HotelReserva reserve) throws AgencyException {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Method responsible to get all hotels are available
+	 * 
+	 * @param {@link Pacote} bundle
+	 * 
+	 * @return {@link List<Hotel>} availableHotelList
+	 * 
+	 * @throws AgencyException 
+	 */
 	@Override
-	public List<Hotel> getAvailableHotelList(Pacote bundle)
-			throws AgencyException {
+	public List<Hotel> getAvailableHotelList(Pacote bundle) throws AgencyException {
 		// TODO Auto-generated method stub
 		return null;
 	}

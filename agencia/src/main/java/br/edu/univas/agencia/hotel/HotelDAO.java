@@ -6,25 +6,56 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.edu.univas.agencia.model.Hotel;
+import br.edu.univas.agencia.model.HotelReserva;
+import br.edu.univas.agencia.model.Pacote;
 
+/**
+ * 
+ * Class responsible by perform operations of hotel module in database
+ * 
+ * @extends GenericHotelDAO
+ *
+ */
 public class HotelDAO extends GenericHotelDAO<Hotel, Integer> {
 
+	/**
+	 * Superclass default constructor.
+	 * 
+	 * @param {@link EntityManager} em
+	 */
 	public HotelDAO(EntityManager em) {
 		super(em);
 	}
 	
-	public float getHotelPrice(Hotel hotel) {
-		float valor = hotel.getValor();
-		return valor;
+	/**
+	 * Method responsible for reservations operation in the database
+	 * 
+	 * @param {@link HotelReserve} reserve
+	 * 
+	 */	
+	public void reservRoom(HotelReserva reserve){
+		//TODO: reservRoom logic
 	}
 
-	public Integer getHotelAvaliability(Hotel hotel) {
-		int resp=hotel.getNumeroVagas();
-		return resp;
+	/**
+	 * method responsible for the search of hotels are available in the database
+	 * 
+	 * @param {@link Pacote} bundle
+	 * 
+	 * @return {@link List<Hotel>} availableHotelList
+	 */
+	public List<Hotel> getAvailableHotelList(Pacote bundle) {
+		//TODO: getAvailableHotelList logic
+		return null;
 	}
-
-	public List<Hotel> hotelReport(Hotel hotel) {
-//		que tipo de relatório vai aqui???
+	
+	/**
+	 * Method responsible for generation of hotel module report 
+	 * @param {@link Hotel} hotel
+	 * @return TODO: RETURN COMMENT
+	 */
+	public List<Hotel> generateHotelReport(Hotel hotel) {
+		//TODO: generateHotelReport logic
 		return null;
 	}
 }
