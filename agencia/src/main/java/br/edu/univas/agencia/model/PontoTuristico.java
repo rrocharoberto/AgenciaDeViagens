@@ -90,13 +90,7 @@ public class PontoTuristico implements java.io.Serializable {
 		this.reservaPontosTuristicoses = reservaPontosTuristicoses;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Transient
-=======
->>>>>>> branch 'master' of https://github.com/rrocharoberto/AgenciaDeViagens.git
-=======
->>>>>>> 0f3eced70caae5dace6ec62956cdccf3dfb303a3
 	public Map<Date, Boolean> getDaysAvailable() {
 		return daysAvailable;
 	}

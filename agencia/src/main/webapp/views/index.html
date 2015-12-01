@@ -1,1 +1,17 @@
 <h1>{{message}}</h1>
+<section>
+    <legend>Módulos</legend>
+    <div ng-repeat="module in modules | orderBy: module.name">
+        <a href="{{module.link}}">{{module.name}}</a> |
+    </div>
+</section>
+<section>
+    <a href="#create-package">Criar pacote</a>
+    <legend>Pacotes vendidos</legend>
+    <div ng-repeat="package in packages">
+        <span>ID pacote: {{package.id}}</span>
+        <span>Cidade: {{package.cidade.nome}}</span>
+        <span>Início: {{package.dataInicio | date: 'dd/MM/yyy'}}</span>
+        <span>Fim: {{package.dataFim | date: 'dd/MM/yyy'}}</span>
+    </div>
+</section>

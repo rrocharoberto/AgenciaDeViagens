@@ -8,10 +8,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 import br.edu.univas.agencia.agencia.business.HotelBusiness;
+import br.edu.univas.agencia.agencia.business.PackageBusiness;
 import br.edu.univas.agencia.agencia.service.api.HotelService;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Hotel;
 import br.edu.univas.agencia.model.HotelReserva;
+import br.edu.univas.agencia.model.Pacote;
 
 
 /**
@@ -22,12 +24,13 @@ import br.edu.univas.agencia.model.HotelReserva;
 @Path("/hotelAgency")
 public class HotelServiceImpl implements HotelService {
 
+	PackageBusiness packageBusiness = new PackageBusiness();
+	HotelBusiness hotelBusiness = new HotelBusiness();
+	
 	@GET
 	@Override
 	public Collection<Hotel> listHotels(@QueryParam("packageId") int packageId) throws AgencyException {
-		//PackageBusiness packageBusiness = new PackageBusiness();
-		//Pacote pacote = packageBusiness.retrievePackage(packageId);
-		HotelBusiness hotelBusiness = new HotelBusiness();
+		Pacote pacote = packageBusiness.retrievePackage(packageId);
 		return hotelBusiness.listHotels(pacote);
 	}
 
@@ -36,9 +39,7 @@ public class HotelServiceImpl implements HotelService {
 	@Override
 	public void createHotelReservation(HotelReserva hotelReserva)
 			throws AgencyException {
-		// TODO packageValidator.validatePackage();
-		// TODO hotelBusiness.validateReservation();
-		// TODO hotelBusiness.createFlightReservation();		
+		hotelBusiness.createReservation(hotelReserva);		
 	}
 
 }

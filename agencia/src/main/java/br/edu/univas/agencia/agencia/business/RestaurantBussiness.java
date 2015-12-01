@@ -5,6 +5,7 @@ import java.util.Collection;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.Restaurante;
+import br.edu.univas.agencia.model.RestauranteReserva;
 import br.edu.univas.agencia.restaurante.RestaurantService;
 
 public class RestaurantBussiness {
@@ -20,6 +21,11 @@ public class RestaurantBussiness {
 	public Collection<Restaurante> listRestaurants(Pacote pacote) throws AgencyException {
 		return restaurantService.getAvailableRestaurantList(pacote);
 
+	}
+
+
+	public void createReservation(RestauranteReserva restauranteReserva) throws AgencyException {
+		restaurantService.createReserve(restauranteReserva);
 	}
 
 }

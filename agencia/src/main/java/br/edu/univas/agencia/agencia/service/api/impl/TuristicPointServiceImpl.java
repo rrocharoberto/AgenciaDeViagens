@@ -1,21 +1,21 @@
 package br.edu.univas.agencia.agencia.service.api.impl;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
+import java.text.ParseException;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
+import br.edu.univas.agencia.agencia.business.PackageBusiness;
+import br.edu.univas.agencia.agencia.business.TuristicPointBusiness;
 import br.edu.univas.agencia.agencia.service.api.TuristicPointService;
 import br.edu.univas.agencia.agencia.service.api.domain.AtractionsReservation;
-import br.edu.univas.agencia.model.Cidade;
+import br.edu.univas.agencia.exception.AgencyException;
+import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
+import br.edu.univas.agencia.pontos.business.impl.ITuristicImpl;
 
 /**
  * Implementation of services defined in {@link TuristicPointService}.
@@ -26,39 +26,20 @@ import br.edu.univas.agencia.model.PontoTuristico;
 @Path("/atractions")
 public class TuristicPointServiceImpl implements TuristicPointService {
 
+	PackageBusiness packageBusiness = new PackageBusiness();
+	TuristicPointBusiness turistictPointBusiness = new TuristicPointBusiness();
+	
 	@GET
 	@Override
-	public List<PontoTuristico> listTuristicPoints(@QueryParam("packageId") int packageId) {
-		List<PontoTuristico> pontos = new ArrayList<PontoTuristico>();
-		PontoTuristico ponto = new PontoTuristico();
-		ponto.setId(1);
-		ponto.setDescricao("Cristo Redentor");
-		
-		Map<Date, Boolean> days = new HashMap<Date, Boolean>();
-		days.put(new Date(), false);
-		Date dt = new Date();
-		Calendar c = Calendar.getInstance(); 
-		c.setTime(dt); 
-		c.add(Calendar.DATE, 1);
-		dt = c.getTime();
-		
-		days.put(dt, true);
-		ponto.setDaysAvailable(days);
-		
-		ponto.setCidade(new Cidade());
-		
-		ponto.setNumeroVagas(10);
-		
-		pontos.add(ponto);
-		return pontos;
+	public List<PontoTuristico> listTuristicPoints(@QueryParam("packageId") int packageId) throws AgencyException, ParseException {
+		return turistictPointBusiness.listTuristicPoints(packageId);
 	}
 
 	@POST
 	@Path("/reservation")
 	@Override
 	public void createTuristicPointReservation(AtractionsReservation atractionsReservation) {
-		//TODO: convert to a list of TuristicPoint
-		//TODO: save turisticPointReservation
+		
 	}
 
 }

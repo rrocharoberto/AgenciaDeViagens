@@ -5,6 +5,7 @@ import java.util.Collection;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.hotel.HotelService;
 import br.edu.univas.agencia.model.Hotel;
+import br.edu.univas.agencia.model.HotelReserva;
 import br.edu.univas.agencia.model.Pacote;
 
 public class HotelBusiness {
@@ -18,6 +19,10 @@ public class HotelBusiness {
 	public Collection<Hotel> listHotels(Pacote pacote) throws AgencyException{
 		
 		return hotelService.getAvailableHotelList(pacote);
+	}
+
+	public void createReservation(HotelReserva hotelReserva) throws AgencyException {
+		hotelService.reservRoom(hotelReserva);
 	}
 
 }

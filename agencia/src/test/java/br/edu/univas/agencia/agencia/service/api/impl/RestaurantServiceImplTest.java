@@ -47,7 +47,7 @@ public class RestaurantServiceImplTest {
 		// given
 		Pacote pacote = new Pacote();
 		Collection<Restaurante> restaurantes = new ArrayList<Restaurante>();
-		BDDMockito.given(packageBusiness.retrivePackage(PACKAGE_ID)).willReturn(pacote);
+		BDDMockito.given(packageBusiness.retrievePackage(PACKAGE_ID)).willReturn(pacote);
 		BDDMockito.given(restaurantBusiness.listRestaurants(pacote)).willReturn(restaurantes);
 		
 		// when
@@ -55,7 +55,7 @@ public class RestaurantServiceImplTest {
 		
 		// then
 		Assert.assertEquals(restaurantes, result);
-		BDDMockito.verify(packageBusiness).retrivePackage(PACKAGE_ID);
+		BDDMockito.verify(packageBusiness).retrievePackage(PACKAGE_ID);
 		BDDMockito.verify(restaurantBusiness).listRestaurants(pacote);
 		BDDMockito.verifyNoMoreInteractions(packageBusiness, restaurantBusiness);
 	}
@@ -64,14 +64,14 @@ public class RestaurantServiceImplTest {
 	public void shouldThrowAgencyExceptionAtListRestaurants() throws AgencyException {
 		// given
 		Pacote pacote = new Pacote();
-		BDDMockito.given(packageBusiness.retrivePackage(PACKAGE_ID)).willReturn(pacote);
+		BDDMockito.given(packageBusiness.retrievePackage(PACKAGE_ID)).willReturn(pacote);
 		BDDMockito.given(restaurantBusiness.listRestaurants(pacote)).willThrow(agencyException);
 
 		// when
 		catchException(restaurantServiceImpl).listRestaurants(PACKAGE_ID);
 
 		// then
-		BDDMockito.verify(packageBusiness).retrivePackage(PACKAGE_ID);
+		BDDMockito.verify(packageBusiness).retrievePackage(PACKAGE_ID);
 		BDDMockito.verify(restaurantBusiness).listRestaurants(pacote);
 		BDDMockito.verifyNoMoreInteractions(packageBusiness, restaurantBusiness);
 		assertThat(caughtException(), instanceOf(AgencyException.class));
@@ -80,13 +80,13 @@ public class RestaurantServiceImplTest {
 	@Test
 	public void shouldThrowAgencyExceptionAtListRestaurantsWhenGetPackage() throws AgencyException {
 		// given
-		BDDMockito.given(packageBusiness.retrivePackage(PACKAGE_ID)).willThrow(agencyException);
+		BDDMockito.given(packageBusiness.retrievePackage(PACKAGE_ID)).willThrow(agencyException);
 
 		// when
 		catchException(restaurantServiceImpl).listRestaurants(PACKAGE_ID);
 
 		// then
-		BDDMockito.verify(packageBusiness).retrivePackage(PACKAGE_ID);
+		BDDMockito.verify(packageBusiness).retrievePackage(PACKAGE_ID);
 		BDDMockito.verifyNoMoreInteractions(packageBusiness, restaurantBusiness);
 		assertThat(caughtException(), instanceOf(AgencyException.class));
 	}
