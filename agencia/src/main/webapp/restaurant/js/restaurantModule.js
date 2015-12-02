@@ -1,4 +1,4 @@
-window.angular.module('restaurantModule', ['ngRoute']);
+window.angular.module('restaurantModule', ['ngRoute', 'ngResource']);
 
 window.angular.module('restaurantModule').config(['$routeProvider', function ($routeProvider) {
 

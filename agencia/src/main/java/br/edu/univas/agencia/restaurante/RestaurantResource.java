@@ -1,6 +1,10 @@
 package br.edu.univas.agencia.restaurante;
 
+import br.edu.univas.agencia.agencia.service.api.CityService;
+import br.edu.univas.agencia.agencia.service.api.impl.CityServiceImpl;
+import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Restaurante;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -91,7 +95,24 @@ public class RestaurantResource {
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Restaurante> getAll(@Context HttpServletRequest request) {
+    public List<Restaurante> getListAll(@Context HttpServletRequest request) {
         return null; //TODO: not implemented.
+    }
+
+    @Path("city/list/all")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public CityListTO getCityList(@Context HttpServletRequest request) {
+
+        CityListTO cityListTO = new CityListTO();
+
+        try {
+            CityService cityServiceImpl = new CityServiceImpl();
+            cityListTO.setCityList(cityServiceImpl.listCities());
+        } catch (AgencyException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return cityListTO;
     }
 }
