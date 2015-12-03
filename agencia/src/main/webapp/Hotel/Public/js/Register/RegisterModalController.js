@@ -14,39 +14,42 @@ var RegisterModalController = (function(){
 	handleOnFormSubmit = function(){
 		$(function(){
 			$('#hotelRegisterForm').on('submit', function(event) {
-				
-				var value = $('#hotel_daily_value').val();
-				
-		        var formData = {
-		        		'id' : $("#hotel_id").val(),
-		                'name' : $('#hotel_name').val(),
-		                'value' : formatValue(value.substr(2)),
-		                'city': $('#hotel_city').val(),
-		                'rooms': $('#hotel_rooms').val(),
-		                'isActive': $('#hotel_isActive').is(":checked") ? true : false
-		         };
-		        
-		        var url = ($("#modal-head").text() == "Cadastro de Hotel") ? 'http://localhost:8080/agencia/api/hotel/root/create' 
-		        														   : 'http://localhost:8080/agencia/api/hotel/root/edit';
-		        
-		        $.ajax({
-		        	type: 'POST',
-		        	url: url,
-		        	data: formData,
-		        	dataType : 'json',
-		        	contentType: 'application/json',
-		        	success: function(result){
-		        		swal("Sucesso!", result.responseText, "success");
-		        		$("#hotelRegisterModal").closeModal();
-		        		Features.refreshTable();
-		        	}, 
-		        	error: function(result){
-		        		Features.refreshTable();
-		        		swal("Erro!", result.responseText, "error");
-		        		$("#hotelRegisterModal").closeModal();
-		        	}
-		        });
-				event.preventDefault();
+				event.preventDefault();	
+				if($('#hotel_city').val() != null){
+					var value = $('#hotel_daily_value').val();
+					
+			        var formData = {
+			        		'id' : $("#hotel_id").val(),
+			                'name' : $('#hotel_name').val(),
+			                'value' : formatValue(value.substr(2)),
+			                'city': $('#hotel_city').val(),
+			                'rooms': $('#hotel_rooms').val(),
+			                'isActive': $('#hotel_isActive').is(":checked") ? true : false
+			         };
+			        
+			        var url = ($("#modal-head").text() == "Cadastro de Hotel") ? 'http://localhost:8080/agencia/api/hotel/root/create' 
+			        														   : 'http://localhost:8080/agencia/api/hotel/root/edit';
+			        
+			        $.ajax({
+			        	type: 'POST',
+			        	url: url,
+			        	data: formData,
+			        	dataType : 'json',
+			        	contentType: 'application/json',
+			        	success: function(result){	
+			        		swal("Sucesso!", result, "success");
+			        		$("#hotelRegisterModal").closeModal();
+			        		Features.refreshTable();
+			        	}, 
+			        	error: function(result){
+			        		Features.refreshTable();
+			        		swal("Erro!", result, "error");
+			        		$("#hotelRegisterModal").closeModal();
+			        	}
+			        });
+				} else {
+					swal("Erro!", "Por favor, selecione ao menos uma cidade da lista!", "error");
+				}
 			});
 		});
 	};

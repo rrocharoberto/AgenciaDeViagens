@@ -149,11 +149,11 @@ var RegisterController = (function() {
 					        	dataType : 'json',
 					        	contentType: 'application/json',
 					        	success: function(result){
-					        		swal("Sucesso!", result.responseText, "success");
+					        		swal("Sucesso!", result, "success");
 					        		Features.refreshTable();
 					        	}, 
 					        	error: function(result){
-					        		swal("Erro!", result.responseText, "error");
+					        		swal("Erro!", result, "error");
 					        		Features.refreshTable();
 					        	}
 					        });

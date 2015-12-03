@@ -132,7 +132,7 @@ public class HotelResource {
 			hotel.setActive(isActive);
 			hotelService.createHotel(hotel);
 			
-			return "O hotel foi cadastrado com sucesso";
+			return gson.toJson("O hotel foi cadastrado com sucesso");
 		}catch(Exception ex){
 			throw ex;
 		}
@@ -217,7 +217,7 @@ public class HotelResource {
 			hotel.setActive(isActive);
 			hotelService.updateHotel(hotel);
 			
-			return "O hotel foi editado com sucesso";
+			return gson.toJson("O hotel foi editado com sucesso");
 		}catch(Exception ex){
 			throw ex;
 		}
@@ -262,7 +262,7 @@ public class HotelResource {
 			if(id == null || id == 0) throw new AgencyException("Não é possível deletar o hotel!");
 			hotelService.deleteHotel(id);
 			
-			return "O hotel foi deletado com sucesso";
+			return gson.toJson("O hotel foi deletado com sucesso");
 		}catch(Exception ex){
 			throw ex;
 		}
