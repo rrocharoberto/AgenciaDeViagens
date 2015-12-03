@@ -6,9 +6,9 @@ var RegisterModalController = (function(){
 	};
 	
 	setEvents = function(){
-		$('select').material_select();
 		$("#hotel_daily_value").maskMoney({ symbol:'R$ ', showSymbol:true, thousands:'.', 
 											decimal:',', symbolStay: true});
+		getCities();
 	};
 	
 	handleOnFormSubmit = function(){
@@ -48,6 +48,18 @@ var RegisterModalController = (function(){
 		        });
 				event.preventDefault();
 			});
+		});
+	};
+	
+	getCities = function(){
+		var cities = "";
+		$.getJSON("http://localhost:8080/agencia/api/hotel/root/getCities", function(data){
+			$.each(data, function(index, item) {
+				cities += String.format("<option value='{0}'>{1}</option>", item.id, item.name);
+			});
+			$("#hotel_city").append(String.format("{0}", cities));
+			$('select').material_select();
+		
 		});
 	};
 	

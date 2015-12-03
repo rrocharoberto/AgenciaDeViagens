@@ -7,7 +7,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import util.HibernateUtil;
+import br.edu.univas.agencia.agencia.dao.CityDAO;
 import br.edu.univas.agencia.exception.AgencyException;
+import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.Hotel;
 import br.edu.univas.agencia.model.HotelReserva;
 import br.edu.univas.agencia.model.Pacote;
@@ -21,6 +23,7 @@ import br.edu.univas.agencia.restaurante.IRestaurant;
 public class HotelService implements  IHotelService{
 	
 	private HotelDAO dao;
+	private CityDAO cityDAO;
 		
 	/**
 	 * Method responsible for the hotel registration
@@ -55,6 +58,24 @@ public class HotelService implements  IHotelService{
 			dao.update(hotel);	
 		} catch (Exception ex) {
 			throw new AgencyException("Problemas ao editar Hotel: " + ex.getMessage());
+		}
+	}
+	
+	/**
+	 * Method responsible to get City by Id
+	 * 
+	 * @param {@link Integer} cityId
+	 * 
+	 * @return {@link Cidade}
+	 * 
+	 * @throws AgencyException
+	 */
+	public Cidade getCityById(Integer cityId) throws AgencyException{
+		try {
+			cityDAO = new CityDAO();
+			return cityDAO.getById(cityId, HibernateUtil.getEntityManager());
+		} catch (Exception ex) {
+			throw new AgencyException("Problemas ao buscar a cidade do Hotel: " + ex.getMessage());
 		}
 	}
 

@@ -2,6 +2,7 @@ package br.edu.univas.agencia.hotel;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +18,11 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import br.edu.univas.agencia.agencia.business.CityBusiness;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.Hotel;
@@ -110,7 +114,7 @@ public class HotelResource {
 	@POST
 	@Path("/create")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.TEXT_PLAIN })
+	@Produces({ MediaType.APPLICATION_JSON })
 	public String create(@FormParam("name") String name,
 					     @FormParam("value") Float value,
 					     @FormParam("city") Integer city,
@@ -119,13 +123,10 @@ public class HotelResource {
 		
 		try{
 			Hotel hotel = new Hotel();
+			Cidade cidade = getCity(city);
+			
 			hotel.setNome(name);
-			hotel.setValor(value);
-			
-			//TODO: getCityById()
-			Cidade cidade = new Cidade();
-			cidade.setId(1);
-			
+			hotel.setValor(value);			
 			hotel.setCidade(cidade);
 			hotel.setNumeroVagas(rooms);
 			hotel.setActive(isActive);
@@ -150,7 +151,7 @@ public class HotelResource {
 	 */
 	@GET
 	@Path("/getAll")
-	@Produces({ MediaType.TEXT_PLAIN })
+	@Produces({ MediaType.APPLICATION_JSON })
 	public String getAll() throws Exception {
 		try {
 			
@@ -196,7 +197,7 @@ public class HotelResource {
 	@POST
 	@Path("/edit")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.TEXT_PLAIN })
+	@Produces({ MediaType.APPLICATION_JSON })
 	public String edit(@FormParam("id") Integer id,
 						 @FormParam("name") String name,
 					     @FormParam("value") Float value,
@@ -206,14 +207,11 @@ public class HotelResource {
 		
 		try{
 			Hotel hotel = new Hotel();
+			Cidade cidade = getCity(city);
+			
 			hotel.setId(id);
 			hotel.setNome(name);
 			hotel.setValor(value);
-			
-			//TODO: getCityById()
-			Cidade cidade = new Cidade();
-			cidade.setId(1);
-			
 			hotel.setCidade(cidade);
 			hotel.setNumeroVagas(rooms);
 			hotel.setActive(isActive);
@@ -226,7 +224,24 @@ public class HotelResource {
 	}
 	
 	/**
-	 * Resource to edit edit a registered hotel.
+	 * Method responsible to call {@link HotelService}, to get one City by Id
+	 * 
+	 * @param {@link Integer} cityId
+	 * 
+	 * @return {@link Cidade}
+	 * 
+	 * @throws Exception
+	 */
+	private Cidade getCity(Integer cityId) throws Exception {
+		try {
+			return hotelService.getCityById(cityId);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+	
+	/**
+	 * Resource to edit a registered hotel.
      * 
      * URI = http://domain/agencia/api/hotel/root/delete
      * 
@@ -240,7 +255,7 @@ public class HotelResource {
 	@POST
 	@Path("/delete")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.TEXT_PLAIN })
+	@Produces({ MediaType.APPLICATION_JSON })
 	public String delete(@FormParam("id") Integer id) throws Exception {
 		
 		try{
@@ -249,6 +264,39 @@ public class HotelResource {
 			
 			return "O hotel foi deletado com sucesso";
 		}catch(Exception ex){
+			throw ex;
+		}
+	}
+	
+	/**
+	 * Resource to get all cities are registered in database.
+	 * 
+	 * URI = http://domain/agencia/api/hotel/root/getCities
+	 * 
+	 * Type = GET
+	 * 
+	 * @return {@link String} Response message of the AJAX request
+	 * 
+	 * @throws Exception
+	 */
+	@GET
+	@Path("/getCities")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public String getCities() throws Exception {
+		try {
+			CityBusiness cityBusiness = new CityBusiness();
+			Collection<Cidade> citiesList = cityBusiness.listCities();
+			
+			JsonArray jsonArray = new JsonArray();
+			for (Cidade  city: citiesList) {
+				JsonObject jsonObject = new JsonObject();
+				jsonObject.addProperty("id", city.getId());
+				jsonObject.addProperty("name", city.getNome());
+				jsonArray.add(jsonObject);
+			}
+		    return gson.toJson(jsonArray);
+		    
+		} catch (Exception ex) {
 			throw ex;
 		}
 	}
