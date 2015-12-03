@@ -1,15 +1,14 @@
 package br.edu.univas.agencia.pagamento;
 
-import br.edu.univas.agencia.model.AgencyException;
+import java.util.List;
+
+import br.edu.univas.agencia.exception.AgencyException;
+import br.edu.univas.agencia.model.Pagamento;
 
 public interface IPayment {
 
-	public void pay(PaymentInfo info) throws AgencyException;
+	public void pay(Pagamento pagamento) throws AgencyException;
 	
-	public void schedulePendency(ScheduleInfo info) throws AgencyException;
-
-	public PaymentPendency queryPendency(PendencyQuery queryInfo) throws AgencyException;
-
-	public Report generateReport(PaymentReportQuery reportQuery) throws AgencyException;
+	public List<Pagamento> getAllPagamento() throws AgencyException;
 	
 }
