@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 import util.HibernateUtil;
-import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
+import br.edu.univas.agencia.model.ReservaPontosTuristicos;
 import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
 
 public class ITuristicImpl {
@@ -17,7 +17,7 @@ public class ITuristicImpl {
 	private PontosTuristicosDAO ptDAO;
 	
 	public ITuristicImpl(){
-		//ptDAO = new PontosTuristicosDAO(HibernateUtil.getEntityManager());
+		ptDAO = new PontosTuristicosDAO(HibernateUtil.getEntityManager());
 	}
 
 	public List<PontoTuristico> getAvailableAttractions(Pacote pacote) throws ParseException{
@@ -25,13 +25,8 @@ public class ITuristicImpl {
 		
 		//Get all attractions of the given city
 		List<PontoTuristico> attractionsOfTheCity = null;
-
-		//TODO: Retirar
-		Cidade cidade = new Cidade();
-		cidade.setId(6861);
 		
-		attractionsOfTheCity = ptDAO.getAttractionsByCity(cidade);
-		//attractionsOfTheCity = ptDAO.getAttractionsByCity(pacote.getCidade());
+		attractionsOfTheCity = ptDAO.getAttractionsByCity(pacote.getCidade());
 		
 		//Get all days of the given period.
 		getDaysOfPeriod(pacote,daysBetweenPeriod);
@@ -56,21 +51,36 @@ public class ITuristicImpl {
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dt1);
-		for (Date dt = dt1; dt.compareTo(dt2) <= 0;) {
+		for (Date dt = cal.getTime(); dt.compareTo(dt2) <= 0;) {
 			daysBetweenPeriods.add(dt);
 			cal.add(Calendar.DATE, +1);
 			dt = cal.getTime();
 		}
 	}
-
 	
 	//Checar se na tabela de reserva de cada ponto turístico, para cada dia, 
 	//o número total de reservas + o número de pessoa do pacote é menor 
 	//ou igual ao número de vagas daquele ponto turístico. Se for, então
 	//tal data é colocada num map<data,boolean> dentro do objeto ponto 
 	//turistico.
-	public void getDaysAvailableForAttraction(PontoTuristico attraction, Date date, int numberOfPeople){
+	public void getDaysAvailableForAttraction(PontoTuristico attraction, 
+			Date date, int numberOfPeople){
 		
+		List<ReservaPontosTuristicos> reservasPontosTuristicos = null;
+		reservasPontosTuristicos = ptDAO.getReservationAttractions(attraction, date);
+		int totalReserved = 0;
+		int reservasAvailable = 0;
+		
+		for(ReservaPontosTuristicos rpt : reservasPontosTuristicos){
+			totalReserved = rpt.getPacote().getQuantidadePessoas();
+		}
+		
+		reservasAvailable = attraction.getNumeroVagas() - totalReserved;
+		
+		if(reservasAvailable >= numberOfPeople){
+			attraction.getDaysAvailable().put(date, false);
+		}
+			
 	}
 	
 	public void removeAttractionsNotAvailable(List<PontoTuristico> attractions){

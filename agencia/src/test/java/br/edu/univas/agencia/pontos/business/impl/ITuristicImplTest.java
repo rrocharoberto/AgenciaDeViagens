@@ -13,11 +13,14 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import br.edu.univas.agencia.model.Pacote;
-import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
+import br.edu.univas.agencia.model.PontoTuristico;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ITuristicImplTest {
 
+	@Mock
+	private PontoTuristico pontoTuristico;
+	
 	@InjectMocks
 	private ITuristicImpl ituristTest;
 
@@ -45,5 +48,4 @@ public class ITuristicImplTest {
 		// then
 		Assert.assertEquals(daysOfPeriodExpected, daysOfPeriod);
 	}
-
 }
