@@ -22,32 +22,50 @@ window.angular.module('restaurantModule').controller('registerCtrl', ['$scope', 
         };
 
         scope.remove = function (restaurant) {
-            console.log(restaurant);
+            restaurant.isActive = false;
+            scope.save(restaurant);
         };
 
         scope.save = function (register) {
-            console.log(register);
+            
+            if (register.id === undefined) {
+                restaurantResource.create.save(register, function (response) {
+                    getRestaurantList();
+                }, function (response) {
+                    console.error('Error CREATE restaurant. Cause: ' + JSON.stringify(response));
+                });
+            } else {
+                restaurantResource.update.save(register, function (response) {
+                    getRestaurantList();
+                }, function (response) {
+                    console.error('Error UPDATE restaurant. Cause: ' + JSON.stringify(response));
+                });
+            }
+
             $('#modalRegister').closeModal();
         };
 
-        function setCity() {
+        function getRestaurantList() {
+            restaurantResource.listAll.get({}, function (response) {
 
-            cityResource.listAll.get({}, function (data) {
-                scope.cityList = data.cityList;
-
+                scope.restaurantList = response.restaurantList;
+                
                 setTimeout(function () {
                     $('select').material_select();
                 });
 
-                // TODO: isso irá retornar do servidor. Somente teste.
-                scope.restaurantList = [
-                    {name: "Restaurante 1", city: scope.cityList[0], quantitySeats: "20", price: "30,00"},
-                    {name: "Restaurante 2", city: scope.cityList[1], quantitySeats: "30", price: "45,00"},
-                    {name: "Restaurante 3", city: scope.cityList[0], quantitySeats: "15", price: "25,00"}
-                ];
+            }, function (response) {
+                console.error('Error GET ALL restaurants. Cause: ' + JSON.stringify(response));
+            });
+        }
 
-            }, function () {
-                console.error('Error GET city list');
+        function setCity() {
+
+            cityResource.listAll.get({}, function (response) {
+                scope.cityList = response.cityList;
+                getRestaurantList();
+            }, function (response) {
+                console.error('Error GET city list. Cause: ' + JSON.stringify(response));
             });
         }
 

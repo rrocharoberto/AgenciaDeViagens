@@ -18,10 +18,10 @@
 
         <tbody>
             <tr ng-repeat="restaurant in restaurantList">
-                <td>{{restaurant.name}}</td>
-                <td>{{restaurant.city.nome}}</td>
-                <td>{{restaurant.quantitySeats}}</td>
-                <td>{{restaurant.price}}</td>
+                <td>{{restaurant.nome}}</td>
+                <td>{{restaurant.cidade.nome}}</td>
+                <td>{{restaurant.numeroVagas}}</td>
+                <td>{{restaurant.valor}}</td>
                 <td><a class="btn-floating green" ng-click="edit(restaurant)"><i class="material-icons">mode_edit</i></a></td>
                 <td><a class="btn-floating red" ng-click="remove(restaurant)"><i class="material-icons">delete</i></a></td>
             </tr>
@@ -47,13 +47,13 @@
                 <div class=" col s12">
                     <div class="row">
                         <label for="name">Nome</label>
-                        <input id="name" type="text" class="validate" ng-model="register.name">
+                        <input id="name" type="text" class="validate" ng-model="register.nome">
                     </div>
 
 
                     <div class="row">
-                        <label for="city">UF</label>
-                        <select id="city" ng-model="register.city"
+                        <label for="city">Cidade</label>
+                        <select id="city" ng-model="register.cidade"
                                 ng-options="city.nome for city in cityList track by city.nome">
                         </select>
                     </div>
@@ -61,12 +61,12 @@
 
                     <div class="row">
                         <label for="quantitySeats">Lugares</label>
-                        <input id="quantitySeats" type="text" class="validate" ng-model="register.quantitySeats">
+                        <input id="quantitySeats" type="text" class="validate" ng-model="register.numeroVagas">
                     </div>
 
                     <div class="row">
                         <label for="price">Preço</label>
-                        <input id="price" type="text" class="validate" ng-model="register.price">
+                        <input id="price" type="text" class="validate" ng-model="register.valor">
                     </div>
 
                 </div>
