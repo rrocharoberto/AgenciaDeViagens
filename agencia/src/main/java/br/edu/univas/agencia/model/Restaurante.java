@@ -1,7 +1,6 @@
 package br.edu.univas.agencia.model;
 
 // Generated 11/11/2015 21:59:26 by Hibernate Tools 3.4.0.CR1
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,141 +26,163 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "restaurante", catalog = "agencia")
 public class Restaurante implements java.io.Serializable {
 
-	private Integer id;
-	private Cidade cidade;
-	private String nome;
-	private int numeroVagas;
-	private float valor;
-	private Set<RestauranteReserva> restauranteReservas = new HashSet<RestauranteReserva>(
-			0);
+    private Integer id;
+    private Cidade cidade;
+    private String nome;
+    private int numeroVagas;
+    private float valor;
+    private boolean active;
+    private Set<RestauranteReserva> restauranteReservas = new HashSet<RestauranteReserva>(0);
 
-	public Restaurante() {
-	}
+    public Restaurante() {
+    }
 
-	public Restaurante(Cidade cidade, String nome, int numeroVagas, float valor) {
-		this.cidade = cidade;
-		this.nome = nome;
-		this.numeroVagas = numeroVagas;
-		this.valor = valor;
-	}
+    public Restaurante(Cidade cidade, String nome, int numeroVagas, float valor) {
+        this.cidade = cidade;
+        this.nome = nome;
+        this.numeroVagas = numeroVagas;
+        this.valor = valor;
+    }
 
-	public Restaurante(Cidade cidade, String nome, int numeroVagas,
-			float valor, Set<RestauranteReserva> restauranteReservas) {
-		this.cidade = cidade;
-		this.nome = nome;
-		this.numeroVagas = numeroVagas;
-		this.valor = valor;
-		this.restauranteReservas = restauranteReservas;
-	}
+    public Restaurante(Cidade cidade, String nome, int numeroVagas,
+            float valor, Set<RestauranteReserva> restauranteReservas) {
+        this.cidade = cidade;
+        this.nome = nome;
+        this.numeroVagas = numeroVagas;
+        this.valor = valor;
+        this.restauranteReservas = restauranteReservas;
+    }
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cidade_id", nullable = false)
-	public Cidade getCidade() {
-		return this.cidade;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cidade_id", nullable = false)
+    public Cidade getCidade() {
+        return this.cidade;
+    }
 
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 
-	@Column(name = "nome", nullable = false, length = 100)
-	public String getNome() {
-		return this.nome;
-	}
+    @Column(name = "nome", nullable = false, length = 100)
+    public String getNome() {
+        return this.nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	@Column(name = "numero_vagas", nullable = false)
-	public int getNumeroVagas() {
-		return this.numeroVagas;
-	}
+    @Column(name = "numero_vagas", nullable = false)
+    public int getNumeroVagas() {
+        return this.numeroVagas;
+    }
 
-	public void setNumeroVagas(int numeroVagas) {
-		this.numeroVagas = numeroVagas;
-	}
+    public void setNumeroVagas(int numeroVagas) {
+        this.numeroVagas = numeroVagas;
+    }
 
-	@Column(name = "valor", nullable = false, precision = 12, scale = 0)
-	public float getValor() {
-		return this.valor;
-	}
+    @Column(name = "valor", nullable = false, precision = 12, scale = 0)
+    public float getValor() {
+        return this.valor;
+    }
 
-	public void setValor(float valor) {
-		this.valor = valor;
-	}
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurante")
-	public Set<RestauranteReserva> getRestauranteReservas() {
-		return this.restauranteReservas;
-	}
+    @Column(name = "active", nullable = false)
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setRestauranteReservas(
-			Set<RestauranteReserva> restauranteReservas) {
-		this.restauranteReservas = restauranteReservas;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + numeroVagas;
-		result = prime
-				* result
-				+ ((restauranteReservas == null) ? 0 : restauranteReservas
-						.hashCode());
-		result = prime * result + Float.floatToIntBits(valor);
-		return result;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurante")
+    public Set<RestauranteReserva> getRestauranteReservas() {
+        return this.restauranteReservas;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Restaurante other = (Restaurante) obj;
-		if (cidade == null) {
-			if (other.cidade != null)
-				return false;
-		} else if (!cidade.equals(other.cidade))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (numeroVagas != other.numeroVagas)
-			return false;
-		if (restauranteReservas == null) {
-			if (other.restauranteReservas != null)
-				return false;
-		} else if (!restauranteReservas.equals(other.restauranteReservas))
-			return false;
-		if (Float.floatToIntBits(valor) != Float.floatToIntBits(other.valor))
-			return false;
-		return true;
-	}
+    public void setRestauranteReservas(
+            Set<RestauranteReserva> restauranteReservas) {
+        this.restauranteReservas = restauranteReservas;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+        result = prime * result + numeroVagas;
+        result = prime
+                * result
+                + ((restauranteReservas == null) ? 0 : restauranteReservas
+                        .hashCode());
+        result = prime * result + Float.floatToIntBits(valor);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Restaurante other = (Restaurante) obj;
+        if (cidade == null) {
+            if (other.cidade != null) {
+                return false;
+            }
+        } else if (!cidade.equals(other.cidade)) {
+            return false;
+        }
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
+            return false;
+        }
+        if (nome == null) {
+            if (other.nome != null) {
+                return false;
+            }
+        } else if (!nome.equals(other.nome)) {
+            return false;
+        }
+        if (numeroVagas != other.numeroVagas) {
+            return false;
+        }
+        if (restauranteReservas == null) {
+            if (other.restauranteReservas != null) {
+                return false;
+            }
+        } else if (!restauranteReservas.equals(other.restauranteReservas)) {
+            return false;
+        }
+        if (Float.floatToIntBits(valor) != Float.floatToIntBits(other.valor)) {
+            return false;
+        }
+        return true;
+    }
 
 }

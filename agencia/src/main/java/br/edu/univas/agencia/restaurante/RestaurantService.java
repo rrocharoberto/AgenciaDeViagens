@@ -4,6 +4,7 @@ import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.Restaurante;
 import br.edu.univas.agencia.model.RestauranteReserva;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,9 +22,7 @@ public class RestaurantService implements IRestaurant {
     public RestaurantService() {
         repository = new RestaurantRepository();
     }
-    
-    
-    
+
     /**
      * Method responsible for saving the restaurant 
      */
@@ -32,13 +31,12 @@ public class RestaurantService implements IRestaurant {
       
         try {
             
-            repository.create(restaurant);
+            repository.createRestaurant(restaurant);
             
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
            throw new AgencyException("Não há nenhum restaurante para inserir");
         } 
-        
-        
+               
         return null;
     }
 
@@ -52,9 +50,9 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
-           repository.update(restaurant); 
+           repository.updateRestaurant(restaurant); 
             
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
            throw new AgencyException("Não há restaurante para alterar");
         }
     }
@@ -64,7 +62,7 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
-            
+            // fazer o updade, falta o campo na tabela
             
         } catch (Exception e) {
            throw new AgencyException("Houve uma falha ao deletar o restaurante");
@@ -84,7 +82,7 @@ public class RestaurantService implements IRestaurant {
             
             repository.getById(restaurantId);
             
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             throw new AgencyException("Não foi possível localizar o restaurante");
         }
         return null;
@@ -102,7 +100,7 @@ public class RestaurantService implements IRestaurant {
             
             repository.getAll();
             
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             throw new AgencyException("Não foi possível listar nenhum restaurante");
         }
         return null;
@@ -119,7 +117,17 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
-            repository.getRestaurantsAvailable(bundle);
+            // saber se o restaurante vai servir almoço e janta.
+            
+            List<Restaurante> restaurants = new ArrayList<Restaurante>();
+            
+            List<Restaurante> getRestaurants = repository.getRestaurantsAvailable(bundle);
+            
+            for (Restaurante restaurant : getRestaurants) {
+                
+                
+                
+            }
             
         } catch (Exception e) {
            throw new AgencyException("Houve uma falha ao buscar os restaurantes");
@@ -127,10 +135,17 @@ public class RestaurantService implements IRestaurant {
         return null;
     }
 
+    /**
+     * Method accept responsibility for creating a reservation
+     * @param reserve
+     * @throws AgencyException 
+     */
     @Override
     public void createReserve(RestauranteReserva reserve) throws AgencyException {
         
         try {
+            
+            repository.createRestaurantReservation(reserve);
             
         } catch (Exception e) {
            throw new AgencyException("Houve uma falha ao criar a reserva");
@@ -142,6 +157,9 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
+            // fazer o updade, falta o campo na tabela
+            // Não tem medoto de alteração das reservas
+            
         } catch (Exception e) {
            throw new AgencyException("Houve uma falha ao remover a reserva");
         }
@@ -151,6 +169,8 @@ public class RestaurantService implements IRestaurant {
     public RestauranteReserva getReserveById(Integer reserveId) throws AgencyException {
         
         try {
+            
+            // falta o método de lista das reservas por id 
             
         } catch (Exception e) {
            throw new AgencyException("Houve uma falha ao buscar esta reserva");
@@ -162,6 +182,8 @@ public class RestaurantService implements IRestaurant {
     public List<RestauranteReserva> getReserveAll() throws AgencyException {
         
         try {
+            
+            // falta o método de lista das reservas
             
         } catch (Exception e) {
            throw new AgencyException("Houve uma falha ao buscar as reservas");

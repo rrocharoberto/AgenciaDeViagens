@@ -1,36 +1,74 @@
-window.angular.module('restaurantModule').controller('registerCtrl', ['$scope',
-    function (scope) {
+window.angular.module('restaurantModule').controller('registerCtrl', ['$scope', 'restaurantResource', 'cityResource',
+    function (scope, restaurantResource, cityResource) {
 
-        scope.restaurantList = [
-            {name: "Restaurante 1", quantitySeats: "20", price: "30,00"},
-            {name: "Restaurante 2", quantitySeats: "30", price: "45,00"},
-            {name: "Restaurante 3", quantitySeats: "15", price: "25,00"}
-        ];
+        scope.register = {
+            name: undefined,
+            city: undefined,
+            quantitySeats: 0,
+            price: 0
+        };
 
         scope.add = function () {
             scope.titleModalRegister = 'Novo cadastro';
-            scope.restaurant = {
-                name: "", 
-                quantitySeats: "", 
-                price: ""
-            };
+            delete scope.register;
             $('#modalRegister').openModal();
         };
 
         scope.edit = function (restaurant) {
-            console.log(restaurant);
             scope.titleModalRegister = 'Editar cadastro';
-            scope.restaurant = window.angular.copy(restaurant);
+            delete scope.register;
+            scope.register = window.angular.copy(restaurant);
             $('#modalRegister').openModal();
         };
 
         scope.remove = function (restaurant) {
-            console.log(restaurant);
+            restaurant.isActive = false;
+            scope.save(restaurant);
         };
 
-        scope.save = function (restaurant) {
-            console.log(restaurant);
+        scope.save = function (register) {
+            
+            if (register.id === undefined) {
+                restaurantResource.create.save(register, function (response) {
+                    getRestaurantList();
+                }, function (response) {
+                    console.error('Error CREATE restaurant. Cause: ' + JSON.stringify(response));
+                });
+            } else {
+                restaurantResource.update.save(register, function (response) {
+                    getRestaurantList();
+                }, function (response) {
+                    console.error('Error UPDATE restaurant. Cause: ' + JSON.stringify(response));
+                });
+            }
+
             $('#modalRegister').closeModal();
         };
+
+        function getRestaurantList() {
+            restaurantResource.listAll.get({}, function (response) {
+
+                scope.restaurantList = response.restaurantList;
+                
+                setTimeout(function () {
+                    $('select').material_select();
+                });
+
+            }, function (response) {
+                console.error('Error GET ALL restaurants. Cause: ' + JSON.stringify(response));
+            });
+        }
+
+        function setCity() {
+
+            cityResource.listAll.get({}, function (response) {
+                scope.cityList = response.cityList;
+                getRestaurantList();
+            }, function (response) {
+                console.error('Error GET city list. Cause: ' + JSON.stringify(response));
+            });
+        }
+
+        setCity();
 
     }]);

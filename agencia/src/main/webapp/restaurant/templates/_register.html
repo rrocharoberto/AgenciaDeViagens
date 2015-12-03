@@ -8,6 +8,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Cidade</th>
                 <th>Lugares</th>
                 <th>Preço</th>
                 <th>Editar</th>
@@ -17,9 +18,10 @@
 
         <tbody>
             <tr ng-repeat="restaurant in restaurantList">
-                <td>{{restaurant.name}}</td>
-                <td>{{restaurant.quantitySeats}}</td>
-                <td>{{restaurant.price}}</td>
+                <td>{{restaurant.nome}}</td>
+                <td>{{restaurant.cidade.nome}}</td>
+                <td>{{restaurant.numeroVagas}}</td>
+                <td>{{restaurant.valor}}</td>
                 <td><a class="btn-floating green" ng-click="edit(restaurant)"><i class="material-icons">mode_edit</i></a></td>
                 <td><a class="btn-floating red" ng-click="remove(restaurant)"><i class="material-icons">delete</i></a></td>
             </tr>
@@ -36,24 +38,43 @@
     </div>
 </div>
 
-<div id="modalRegister" class="modal">
+<div id="modalRegister" class="modal modal-fixed-footer">
     <div class="modal-content">
         <h4>{{titleModalRegister}}</h4>
+        {{register}}
         <form class="col s12">
             <div class="row">
                 <div class=" col s12">
-                    <label for="name">Nome</label>
-                    <input id="name" type="text" class="validate" ng-model="restaurant.name">
-                    <label for="quantitySeats">Lugares</label>
-                    <input id="quantitySeats" type="text" class="validate" ng-model="restaurant.quantitySeats">
-                    <label for="price">Preço</label>
-                    <input id="price" type="text" class="validate" ng-model="restaurant.price">
+                    <div class="row">
+                        <label for="name">Nome</label>
+                        <input id="name" type="text" class="validate" ng-model="register.nome">
+                    </div>
+
+
+                    <div class="row">
+                        <label for="city">Cidade</label>
+                        <select id="city" ng-model="register.cidade"
+                                ng-options="city.nome for city in cityList track by city.nome">
+                        </select>
+                    </div>
+
+
+                    <div class="row">
+                        <label for="quantitySeats">Lugares</label>
+                        <input id="quantitySeats" type="text" class="validate" ng-model="register.numeroVagas">
+                    </div>
+
+                    <div class="row">
+                        <label for="price">Preço</label>
+                        <input id="price" type="text" class="validate" ng-model="register.valor">
+                    </div>
+
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <a href="" class="modal-action waves-effect waves-green btn-flat" ng-click="save(restaurant)">Salvar</a>
+        <a href="" class="modal-action waves-effect waves-green btn-flat" ng-click="save(register)">Salvar</a>
         <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
     </div>
 </div>
