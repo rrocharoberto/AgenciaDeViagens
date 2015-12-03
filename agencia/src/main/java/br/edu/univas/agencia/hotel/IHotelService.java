@@ -18,10 +18,11 @@ public interface IHotelService extends IHotel {
 	 * Method responsible to the Create Operation
 	 * 
 	 * @param {@link Hotel} hotel
+	 * @return 
 	 * 
 	 * @throws AgencyException
 	 */
-	public void createHotel(Hotel hotel) throws AgencyException;
+	public Hotel createHotel(Hotel hotel) throws AgencyException;
 	
 	/**
 	 * Method responsible to the Update Operation

@@ -3,8 +3,6 @@ package br.edu.univas.agencia.hotel;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import br.edu.univas.agencia.model.Hotel;
 import br.edu.univas.agencia.model.HotelReserva;
 import br.edu.univas.agencia.model.Pacote;
@@ -26,6 +24,14 @@ public class HotelDAO extends GenericHotelDAO<Hotel, Integer> {
 	public HotelDAO(EntityManager em) {
 		super(em);
 	}
+//	@Override
+//	public void salvar(Hotel hotel){
+//		em.getTransaction().begin();
+//
+//		em.persist(hotel);
+//
+//		em.getTransaction().commit();
+//	}
 	
 	/**
 	 * Method responsible for reservations operation in the database

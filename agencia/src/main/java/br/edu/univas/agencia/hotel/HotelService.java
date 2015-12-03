@@ -26,17 +26,19 @@ public class HotelService implements  IHotelService{
 	 * Method responsible for the hotel registration
 	 * 
 	 * @param hotel
+	 * @return 
 	 * 
      * @throws AgencyException 
 	 */
 	@Override
-	public void createHotel(Hotel hotel) throws AgencyException {
+	public Hotel createHotel(Hotel hotel) throws AgencyException {
 		try {
 			dao = new HotelDAO(HibernateUtil.getEntityManager());
 			dao.salvar(hotel);	
 		} catch (Exception ex) {
 			throw new AgencyException("Problemas ao salvar Hotel: " + ex.getMessage());
 		}
+		return null;
 	}
 
 	/**
