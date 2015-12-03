@@ -5,7 +5,9 @@ import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.Restaurante;
 import br.edu.univas.agencia.model.RestauranteReserva;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class that implements interface {@link IRestaurant}. This class is
@@ -117,7 +119,16 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
-            // saber se o restaurante vai servir almoço e janta.
+            // 9 seria numero de vagas prenchidas
+            //new restaurante terei o a quantidade que ele comporta
+            //numero de pessoas * o tempo
+            
+            Map<Restaurante, Integer> restaurantListReserved = new HashMap<Restaurante, Integer>();
+            
+            restaurantListReserved.put(new Restaurante(), 9);
+            restaurantListReserved.put(new Restaurante(), 200);
+            
+            
             
             List<Restaurante> restaurants = new ArrayList<Restaurante>();
             
