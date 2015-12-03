@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="formAddPontos">
+		<p:dialog header="Adicionar Ponto Turístico" widgetVar="addPonto"
+			id="modalAddPOnto" minHeight="100" modal="true">
+
+			<p:messages autoUpdate="true" />
+			<h:panelGrid columns="2">
+
+				<h:outputLabel for="pName" value="Nome" />
+				<p:inputText id="pName" required="true"
+					value="#{pontosTuristicosController.pontoTuristico.descricao}"
+					requiredMessage="Por favor informe um nome" maxlength="19" />
+					
+				<p:outputLabel value="Cidade:"></p:outputLabel>
+				<p:selectOneMenu id="comboCidade"
+								 value="#{pontosTuristicosController.pontoTuristico.cidade}"
+								 converter="cidadeConverter">
+							
+							<f:selectItems value="#{pontosTuristicosController.cidades}"
+										   var="cid"
+										   itemValue="#{cid}"
+										   itemLabel="#{cid.nome} - #{cid.estado.uf}"/>
+				</p:selectOneMenu>
+
+				<h:outputLabel for="nVagas" value="Número de Vagas:" />
+				<p:inputText id="nVagas" required="true"
+					value="#{pontosTuristicosController.pontoTuristico.numeroVagas}"
+					requiredMessage="Por favor informe o número de vagas" maxlength="19" />
+					
+			</h:panelGrid>
+
+			<p:separator />
+
+			<h:panelGrid columns="2" style="margin-left:50px">
+				<p:commandButton value="Salvar"
+					actionListener="#{pontosTuristicosController.addPontoTuristico()}"
+					update="formPontos:tabPontosTuristicos" />
+
+				<p:commandButton value="Cancelar" onclick="PF('addPonto').hide()"
+					immediate="true" />
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+</ui:composition>

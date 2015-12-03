@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:form id="formPontos">
+	
+		<p:messages autoUpdate="true" />
+	
+		<p:commandButton value="Adicionar" type="button" onclick="PF('addPonto').show();" />
+	
+		<p:separator></p:separator>
+		
+		<p:dataTable var="pts" id="tabPontosTuristicos" value="#{pontosTuristicosController.pontosTuristicos}"
+					 paginator="true" paginatorPosition="bottom" rows="8" style="text-align:center">
+			
+			<p:column headerText="Nome">
+				<h:outputText value="#{pts.descricao}" />
+			</p:column>
+			
+			<p:column headerText="Cidade">
+				<h:outputText value="#{pts.cidade.nome}" />
+			</p:column>
+			
+			<p:column headerText="Estado">
+				<h:outputText value="#{pts.cidade.estado.uf}" />
+			</p:column>
+			
+			<p:column headerText="Nº Vagas">
+				<h:outputText value="#{pts.numeroVagas}" />
+			</p:column>
+			
+			<p:column headerText="Opções" id="opcoes">
+				
+			<!--  <p:commandButton id="buttonPencil" icon="ui-icon-pencil"
+					actionListener="#{pontosTuristicosController.loadPontoTuristicoToEdit(pts)}"
+					update="formEditCostureira:modalEditCostureira"
+					oncomplete="PF('editCostureira').show()">
+			</p:commandButton>
+				
+			<p:commandButton id="buttonExcluir" icon="ui-icon-trash"
+					actionListener="#{pontosTuristicosController.loadPontoTuristicoToDelete(pts)}" 
+					oncomplete="PF('modalExluirCostureira').show()"
+					update="formPontos:tabPontosTuristicos"/> -->
+			</p:column>
+	
+		</p:dataTable>
+	</h:form>
+
+	<ui:include src="addPontosDialog.xhtml" />
+	<!-- <ui:include src="editPontosDialog.xhtml" />
+	<ui:include src="confirmExcluirDialog.xhtml" /> -->
+	
+</ui:composition>

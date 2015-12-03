@@ -1,0 +1,63 @@
+h1{
+	color: gray!important;
+	font-family: Arial;
+	
+}
+
+body{
+	margin: 0px 140px 0px 140px!important;
+	font-size: 14px;
+}
+
+form{
+	margin-bottom: 40px;
+}
+
+#footer{
+	margin-top: 30px;
+	background-color: #A9A9A9;
+	text-align: center;
+	color: #ffffff;
+	
+}
+#margintop{
+	margin-top: 50px!important;
+}
+
+.titulos{
+	font-size: 25px;
+	color: #8852;
+}
+
+.tituloCosturira{
+	font-size: 15px;
+	color: #8852;
+}
+
+.panelGridEscolherAtividadesOrder{
+	margin-bottom:10px;
+	border: none!important;
+}
+
+#selectAtividadeToOrder{
+	margin-left:110px!important;
+}
+
+.label{
+	font-size: 15px;
+	font-family: Arial;
+}
+
+.labelPrazoNaoAtendido{
+	font-size: 15px;
+	font-family: Arial;
+	color:red;
+}
+
+.ui-panelgrid td, .ui-panelgrid tr{
+    border-style: none !important
+}
+
+.inputPrecoPecaClass input{
+	width:80px!important;
+}
