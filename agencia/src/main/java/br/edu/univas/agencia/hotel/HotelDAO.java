@@ -3,6 +3,9 @@ package br.edu.univas.agencia.hotel;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import util.HibernateUtil;
 import br.edu.univas.agencia.model.Hotel;
 import br.edu.univas.agencia.model.HotelReserva;
 import br.edu.univas.agencia.model.Pacote;
@@ -24,24 +27,6 @@ public class HotelDAO extends GenericHotelDAO<Hotel, Integer> {
 	public HotelDAO(EntityManager em) {
 		super(em);
 	}
-//	@Override
-//	public void salvar(Hotel hotel){
-//		em.getTransaction().begin();
-//
-//		em.persist(hotel);
-//
-//		em.getTransaction().commit();
-//	}
-	
-	/**
-	 * Method responsible for reservations operation in the database
-	 * 
-	 * @param {@link HotelReserve} reserve
-	 * 
-	 */	
-	public void reservRoom(HotelReserva reserve){
-		//TODO: reservRoom logic
-	}
 
 	/**
 	 * method responsible for the search of hotels are available in the database
@@ -51,8 +36,23 @@ public class HotelDAO extends GenericHotelDAO<Hotel, Integer> {
 	 * @return {@link List<Hotel>} availableHotelList
 	 */
 	public List<Hotel> getAvailableHotelList(Pacote bundle) {
-		//TODO: getAvailableHotelList logic
-		return null;
+		String sql = "select ht.*, sum(p.quantidade_pessoas) as soma " +
+					 "from pacote p " + 
+					 "join hotel_reserva hr on p.id = hr.pacote_id " +
+					 "join hotel ht on ht.id = hr.hotel_id " +
+					 "join cidade cd on cd.id = :cidadeID " +
+					 "where hr.data_reserva between :inicio and :fim " +
+					 "and ht.active = 1 " +
+					 "group by ht.id, ht.nome, ht.numero_vagas, ht.valor, ht.cidade_id";
+		
+		Query query = HibernateUtil.getEntityManager().createQuery(sql);
+		
+		query.setParameter("cidadeID", bundle.getCidade().getId());
+		query.setParameter("inicio", bundle.getDataInicio());
+		query.setParameter("fim", bundle.getDataFim());
+		 
+		List<Hotel> availableHotelList =  query.getResultList();
+		return availableHotelList;
 	}
 	
 	/**
