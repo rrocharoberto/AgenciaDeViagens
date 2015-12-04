@@ -1,10 +1,10 @@
 app.controller('AtractionsController', ['$scope',  'toastr', 'PackageService', 'AtractionsService',
 function($scope, toastr, PackageService, AtractionsService) {
     $scope.package = PackageService.getPackage();
-    $scope.atractionsReservation = {atractions:[]};
+    $scope.atractionsReservation = {atractions:[], pacote: $scope.package};
 
     $scope.loadAtractions = function() {
-        AtractionsService.getAtractions(1).then($scope.successLoadAtractions);
+        AtractionsService.getAtractions($scope.package.id).then($scope.successLoadAtractions);
     };
 
     $scope.savePackage = function() {

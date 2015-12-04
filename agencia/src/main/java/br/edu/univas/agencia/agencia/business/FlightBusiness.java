@@ -11,18 +11,24 @@ import br.edu.univas.agencia.voo.VooBean;
 
 public class FlightBusiness {
 	
+	private final VooBean vooBean;
+	
+	public FlightBusiness() {
+		this.vooBean = new VooBean();
+	}
+
 	public List<Integer> listFlightTypes(Pacote pacote) throws AgencyException {
 		return null;
 		
 	}
 	
 	public Collection<Voo> listFlights(Pacote pacote) throws AgencyException {
-		return null;
+		return vooBean.getVoos();
 		
 	}
 	
-	public void createFlightReservation(VooReserva vooReserva) throws AgencyException {
-		
+	public void createFlightReservation(VooReserva vooReserva)
+			throws AgencyException {
 	}
 
 }

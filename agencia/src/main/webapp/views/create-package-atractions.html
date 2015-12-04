@@ -1,13 +1,17 @@
-<section>
-    <form ng-submit="savePackage()">
-        <div ng-repeat="atraction in atractionsLoaded">
-            {{atraction.descricao}} --
-            <div ng-repeat="(key, value) in atraction.daysAvailable | orderBy:'-key'">
-                <input type="checkbox" ng-model="atractionsReservation.atractions[$parent.$index].daysAvailable[key]" />
-                {{key | date:'dd/MM/yyyy'}}
+<div class="row">
+    <form class="col s12" ng-submit="savePackage()">
+        <div class="row">
+            <div ng-repeat="atraction in atractionsLoaded">
+                {{atraction.descricao}} --
+                <div ng-repeat="(key, value) in atraction.daysAvailable | orderBy:'-key'">
+                    <input type="checkbox" class="filled-in" id="filled-in-box" ng-model="atractionsReservation.atractions[$parent.$index].daysAvailable[key]" />
+                    <label for="filled-in-box">{{key | date:'dd/MM/yyyy'}}</label>
+                </div>
             </div>
         </div>
-
-        <input type="submit" value="Salvar">
+        
+        <button class="btn waves-effect waves-light" type="submit" name="action">Salvar
+            <i class="material-icons right"></i>
+        </button>
     </form>
 </section>
