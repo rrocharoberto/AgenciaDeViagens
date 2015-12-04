@@ -2,10 +2,6 @@ package br.edu.univas.agencia.hotel;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import util.HibernateUtil;
 import br.edu.univas.agencia.agencia.dao.CityDAO;
 import br.edu.univas.agencia.exception.AgencyException;
@@ -13,7 +9,6 @@ import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.Hotel;
 import br.edu.univas.agencia.model.HotelReserva;
 import br.edu.univas.agencia.model.Pacote;
-import br.edu.univas.agencia.restaurante.IRestaurant;
 
 /**
  * This class is responsible by business logic of hotel.
@@ -24,6 +19,7 @@ public class HotelService implements  IHotelService{
 	
 	private HotelDAO dao;
 	private CityDAO cityDAO;
+	private HotelReservationDAO reservationDAO;
 		
 	/**
 	 * Method responsible for the hotel registration
@@ -126,8 +122,12 @@ public class HotelService implements  IHotelService{
 	 */
 	@Override
 	public void reservRoom(HotelReserva reserve) throws AgencyException {
-		// TODO Auto-generated method stub
-		
+		try {
+			reservationDAO = new HotelReservationDAO(HibernateUtil.getEntityManager());
+			reservationDAO.salvar(reserve);
+		} catch (Exception ex) {
+			throw new AgencyException("Problemas ao salvar reserva: " + ex.getMessage());
+		}
 	}
 
 	/**
@@ -141,7 +141,12 @@ public class HotelService implements  IHotelService{
 	 */
 	@Override
 	public List<Hotel> getAvailableHotelList(Pacote bundle) throws AgencyException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			dao = new HotelDAO(HibernateUtil.getEntityManager());
+			List<Hotel> availableHotelList = dao.getAvailableHotelList(bundle);
+			return availableHotelList;
+		} catch (Exception ex) {
+			throw new AgencyException("Problemas ao buscar os Hotéis com vaga: " + ex.getMessage());
+		}
 	}
 }

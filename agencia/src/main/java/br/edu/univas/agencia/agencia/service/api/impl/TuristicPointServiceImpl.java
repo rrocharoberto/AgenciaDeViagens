@@ -39,7 +39,7 @@ public class TuristicPointServiceImpl implements TuristicPointService {
 	@Path("/reservation")
 	@Override
 	public void createTuristicPointReservation(AtractionsReservation atractionsReservation) {
-		
+		turistictPointBusiness.createTuristicPointReservation(atractionsReservation);
 	}
 
 }

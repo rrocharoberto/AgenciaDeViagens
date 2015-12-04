@@ -10,6 +10,7 @@ import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.Restaurante;
 import br.edu.univas.agencia.model.RestauranteReserva;
 import java.util.List;
+import java.util.Map;
 
 public interface IRestaurantRepository {
     
@@ -25,7 +26,7 @@ public interface IRestaurantRepository {
 
     public List<Restaurante> getAll() throws AgencyException;
 
-    public List<Restaurante> getRestaurantsAvailable(Pacote pacote) throws AgencyException;
+    public Map<Restaurante, Float> getRestaurantsAvailable(Pacote pacote) throws AgencyException;
 
     
 }

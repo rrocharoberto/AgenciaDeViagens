@@ -16,7 +16,9 @@ function($scope, toastr, CityService, PackageService) {
         $scope.cities = data;
     };
 
-    $scope.successCreatePackage = function() {
+    $scope.successCreatePackage = function(response) {
+        var data = response.data;
+        $scope.package = data;
         toastr.success('Sucesso ao realizar o cadastro!', {
             closeButton: true
         });

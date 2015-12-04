@@ -14,6 +14,7 @@ import org.primefaces.context.RequestContext;
 import util.HibernateUtil;
 import br.edu.univas.agencia.agencia.dao.CityDAO;
 import br.edu.univas.agencia.model.Cidade;
+import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
 import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
 
@@ -33,9 +34,9 @@ public class PontosTuristicosController {
 	@PostConstruct
 	public void init(){
 		ptDAO = new PontosTuristicosDAO(HibernateUtil.getEntityManager());
-		cityDao = new CityDAO(HibernateUtil.getEntityManager());
+		cityDao = new CityDAO();
 		pontosTuristicos = ptDAO.listAllAttractions();
-		cidades = cityDao.listAllCities();
+		cidades = cityDao.getAll(HibernateUtil.getEntityManager());
 		pontoTuristico = new PontoTuristico();
 	}
 	
@@ -58,12 +59,12 @@ public class PontosTuristicosController {
 		pontoTuristicoToDelete = pontoTuristico;
 	}
 	
+	
 	/*Messages Handling*/
 	public void sendMessageToView(String message,Severity severity) {
 		FacesContext contexto = FacesContext.getCurrentInstance();
 		contexto.addMessage(null, new FacesMessage(severity, message, null));
 	}
-	
 	
 	/*GETTERS AND SETTERS*/
 	public List<PontoTuristico> getPontosTuristicos() {

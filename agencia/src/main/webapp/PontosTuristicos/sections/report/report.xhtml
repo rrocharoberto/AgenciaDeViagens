@@ -4,9 +4,36 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<div class="formContent" align="center" >
-		<img  src="#{facesContext.externalContext.requestContextPath}/css/images/tela_inicial.jpg" width="781px" height="250px"  alt="" class="welcome" />
-	</div>
-	
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript"
+		src="${facesContext.externalContext.requestContextPath}/PontosTuristicos/js/ReportChart.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+	<h:inputHidden value="#{reportController.showDataInicio}"
+		id="dataInicio" />
+	<h:inputHidden value="#{reportController.showDataFim}" id="dataFim" />
+	<h:inputHidden value="#{reportController.reportDataJson}"
+		id="reportData" />
+	<h:form id="formContent" prependId="false"
+  onkeypress="if (event.keyCode == 13) event.preventDefault();">
+
+		<!-- error message -->
+		<p:messages id="messages" />
+
+		<p:panelGrid columns="4">
+			<p:calendar id="dateIni" value="#{reportController.dataInicio}" placeholder="Data Inicial" />
+			<p:calendar id="dateFim" value="#{reportController.dataFim}" placeholder="Data Final" />
+			
+			<h:commandButton value="Update"
+				action="#{reportController.updateReport()}" ajax="false" />
+		</p:panelGrid>
+		
+		<p:separator />
+
+		<div id="container"
+			style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+	</h:form>
+
 </ui:composition>

@@ -2,16 +2,43 @@
 <section>
     <legend>Módulos</legend>
     <div ng-repeat="module in modules | orderBy: module.name">
-        <a href="{{module.link}}">{{module.name}}</a> |
+
+        <div class="row">
+            <div class="col s12 m7">
+                <div class="card small">
+                    <div class="card-image">
+                        <img src="{{module.image}}" width="100px" height="300px">
+                        <span class="card-title">{{module.name}}</span>
+                    </div>
+                    <div class="card-content">
+                        <p>{{module.description}}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{module.link}}">{{module.name}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 <section>
-    <a href="#create-package">Criar pacote</a>
     <legend>Pacotes vendidos</legend>
-    <div ng-repeat="package in packages">
-        <span>ID pacote: {{package.id}}</span>
-        <span>Cidade: {{package.cidade.nome}}</span>
-        <span>Início: {{package.dataInicio | date: 'dd/MM/yyy'}}</span>
-        <span>Fim: {{package.dataFim | date: 'dd/MM/yyy'}}</span>
-    </div>
+    <table>
+        <thead>
+          <tr>
+              <th data-field="id">ID pacote</th>
+              <th data-field="cidade">Cidade</th>
+              <th data-field="inicio">Início</th>
+              <th data-field="fim">Fim</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="package in packages">
+                <td>{{package.id}}</td>
+                <td>{{package.cidade.nome}}</td>
+                <td>{{package.dataInicio | date: 'dd/MM/yyy'}}</td>
+                <td>{{package.dataFim | date: 'dd/MM/yyy'}}</td>
+            </tr>
+        </tbody>
+    <table>
 </section>
