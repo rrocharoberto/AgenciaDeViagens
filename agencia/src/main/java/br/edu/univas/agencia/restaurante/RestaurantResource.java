@@ -1,7 +1,6 @@
 package br.edu.univas.agencia.restaurante;
 
-import br.edu.univas.agencia.agencia.service.api.CityService;
-import br.edu.univas.agencia.agencia.service.api.impl.CityServiceImpl;
+import br.edu.univas.agencia.agencia.business.CityBusiness;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.Restaurante;
@@ -149,8 +148,8 @@ public class RestaurantResource {
 
         try {
             CityListTO cityListTO = new CityListTO();
-            CityService cityServiceImpl = new CityServiceImpl();
-            cityListTO.setCityList(cityServiceImpl.listCities());
+            CityBusiness cityBusiness = new CityBusiness();
+            cityListTO.setCityList(cityBusiness.listCities());
             return cityListTO;
         } catch (AgencyException e) {
             throw e;
