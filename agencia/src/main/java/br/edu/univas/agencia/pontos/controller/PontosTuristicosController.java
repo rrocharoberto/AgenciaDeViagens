@@ -14,7 +14,6 @@ import org.primefaces.context.RequestContext;
 import util.HibernateUtil;
 import br.edu.univas.agencia.agencia.dao.CityDAO;
 import br.edu.univas.agencia.model.Cidade;
-import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
 import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
 
@@ -49,6 +48,30 @@ public class PontosTuristicosController {
 		request.update("formAddPontos");
 		pontoTuristico = new PontoTuristico();
 		sendMessageToView("Ponto turístico adicionado com sucesso!", FacesMessage.SEVERITY_INFO);
+	}
+	
+	public void updatePontoTuristico(){
+		ptDAO.updateCostureira(pontoTuristicoToEdit);
+		sendMessageToView("Ponto turístico atualizado com sucesso!", FacesMessage.SEVERITY_INFO);
+		
+		RequestContext request = RequestContext.getCurrentInstance();
+		request.execute("PF('editPonto').hide()");
+	}
+	
+	
+	public void deletePontoTuristico() {
+
+		try {
+			ptDAO.removePontoTuristico(pontoTuristicoToDelete);
+			pontosTuristicos.remove(pontoTuristicoToDelete);
+			sendMessageToView("Ponto turístico removido com sucesso!",
+					FacesMessage.SEVERITY_INFO);
+		} catch (Exception e) {
+			sendMessageToView(
+					"Este Ponto Turístico está relacionada com alguma reserva ou pacote e não pode ser excluído!",
+					FacesMessage.SEVERITY_FATAL);
+		}
+
 	}
 	
 	public void loadPontoTuristicoToEdit(PontoTuristico pontoTuristico){

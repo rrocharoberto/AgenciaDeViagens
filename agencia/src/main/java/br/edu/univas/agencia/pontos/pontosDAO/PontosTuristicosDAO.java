@@ -35,6 +35,37 @@ public class PontosTuristicosDAO {
 		}
 	}
 	
+	public void updateCostureira(PontoTuristico pontoTuristico){
+		try {
+			entityManager.getTransaction().begin();
+			entityManager.merge(pontoTuristico);
+			entityManager.flush();
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			System.out.println("Problema ao atualizar Ponto Turistico");
+		}
+	}
+	
+	public void removePontoTuristico(PontoTuristico pontoTuristico) throws Exception {
+		try {
+			entityManager.getTransaction().begin();
+			String query = "DELETE from ponto_turistico where id = :idPonto";
+			Query q = entityManager.createNativeQuery(query);
+			q.setParameter("idPonto", pontoTuristico.getId());
+			q.executeUpdate();
+			entityManager.flush();
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			System.out.println("Problema ao remover Ponto Turístico");
+			throw e;
+		}
+	}
+	
+	
 	public void doReservations(List<ReservaPontosTuristicos> reservations){
 		try {
 			entityManager.getTransaction().begin();

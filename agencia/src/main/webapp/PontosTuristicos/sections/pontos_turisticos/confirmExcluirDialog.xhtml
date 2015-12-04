@@ -6,17 +6,17 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form id="formExcluirCostureira">
-		<p:confirmDialog header="Excluir costureira"
-						 message="Tem certeza que deseja excluir esta costureira?"
-						 widgetVar="modalExluirCostureira">
+		<p:confirmDialog header="Excluir ponto turístico"
+						 message="Tem certeza que deseja excluir este ponto turístico"
+						 widgetVar="modalExcluirPonto">
 				
 				<p:commandButton value="Sim"
-								 action="#{costureirasController.excluirCostureira()}" 
-								 oncomplete="PF('modalExluirCostureira').hide()"
-								 update="formCostureiras:tabCostureiras"/>
+								 action="#{pontosTuristicosController.deletePontoTuristico}" 
+								 oncomplete="PF('modalExcluirPonto').hide()"
+								 update="formPontos:tabPontosTuristicos"/>
 		
 				<p:commandButton value="Não"
-								 onclick="PF('modalExluirCostureira').hide()" />
+								 onclick="PF('modalExcluirPonto').hide()" />
 		</p:confirmDialog>
 	</h:form>
 </ui:composition>

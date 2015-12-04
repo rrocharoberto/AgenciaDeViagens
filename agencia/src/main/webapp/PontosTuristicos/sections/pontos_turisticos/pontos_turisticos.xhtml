@@ -34,23 +34,23 @@
 			
 			<p:column headerText="Opções" id="opcoes">
 				
-			<!--  <p:commandButton id="buttonPencil" icon="ui-icon-pencil"
+			<p:commandButton id="buttonPencil" icon="ui-icon-pencil"
 					actionListener="#{pontosTuristicosController.loadPontoTuristicoToEdit(pts)}"
-					update="formEditCostureira:modalEditCostureira"
-					oncomplete="PF('editCostureira').show()">
+					update="formEditPonto"
+					oncomplete="PF('editPonto').show()">
 			</p:commandButton>
 				
 			<p:commandButton id="buttonExcluir" icon="ui-icon-trash"
 					actionListener="#{pontosTuristicosController.loadPontoTuristicoToDelete(pts)}" 
-					oncomplete="PF('modalExluirCostureira').show()"
-					update="formPontos:tabPontosTuristicos"/> -->
+					oncomplete="PF('modalExcluirPonto').show()"
+					update="formPontos:tabPontosTuristicos"/>
 			</p:column>
 	
 		</p:dataTable>
 	</h:form>
 
 	<ui:include src="addPontosDialog.xhtml" />
-	<!-- <ui:include src="editPontosDialog.xhtml" />
-	<ui:include src="confirmExcluirDialog.xhtml" /> -->
+	<ui:include src="editPontosDialog.xhtml" />
+	<ui:include src="confirmExcluirDialog.xhtml" />
 	
 </ui:composition>
