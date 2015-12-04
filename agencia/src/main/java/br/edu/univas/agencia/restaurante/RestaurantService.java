@@ -4,7 +4,11 @@ import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.Restaurante;
 import br.edu.univas.agencia.model.RestauranteReserva;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +68,16 @@ public class RestaurantService implements IRestaurant {
         
         try {
             
-            // fazer o updade, falta o campo na tabela
+            Restaurante restaurante = repository.getById(restaurantId);
+            restaurante.setId(restaurante.getId());
+            restaurante.setNome(restaurante.getNome());
+            restaurante.setNumeroVagas(restaurante.getNumeroVagas());
+            restaurante.setRestauranteReservas(restaurante.getRestauranteReservas());
+            restaurante.setValor(restaurante.getValor());
+            restaurante.setCidade(restaurante.getCidade());
+            restaurante.setActive(false);
+            
+            repository.updateRestaurant(restaurante);
             
         } catch (Exception e) {
            throw new AgencyException("Houve uma falha ao deletar o restaurante");
@@ -117,33 +130,74 @@ public class RestaurantService implements IRestaurant {
     @Override
     public List<Restaurante> getAvailableRestaurantList(Pacote bundle) throws AgencyException {
         
+        List<Restaurante> restaurants = new ArrayList<Restaurante>();
+        
         try {
+           //Recebendo um hashMap de restaurantes
+            Map<Restaurante, Float> getRestaurants = repository.getRestaurantsAvailable(bundle);
             
-            // 9 seria numero de vagas prenchidas
-            //new restaurante terei o a quantidade que ele comporta
-            //numero de pessoas * o tempo
-            
-            Map<Restaurante, Integer> restaurantListReserved = new HashMap<Restaurante, Integer>();
-            
-            restaurantListReserved.put(new Restaurante(), 9);
-            restaurantListReserved.put(new Restaurante(), 200);
-            
-            
-            
-            List<Restaurante> restaurants = new ArrayList<Restaurante>();
-            
-            List<Restaurante> getRestaurants = repository.getRestaurantsAvailable(bundle);
-            
-            for (Restaurante restaurant : getRestaurants) {
+            for (Map.Entry<Restaurante, Float> entry : getRestaurants.entrySet()) {
+                Restaurante restaurante = entry.getKey();
+                Float totalReservado = entry.getValue();
                 
+                //verifica quantas vagas o restaurante possui
+                float vagas = restaurante.getNumeroVagas() - totalReservado;
                 
+                String dataInicio = String.valueOf(bundle.getDataInicio());
+                String dataFim = String.valueOf(bundle.getDataFim());
                 
+                //recebe o número de dias do pacote
+                int dias = contaDias(dataInicio, dataFim);
+                
+                //verifica a quantidade de vagas necessarias
+                int vagasNecessarias = bundle.getQuantidadePessoas() * dias;
+                
+                //se o restaurante possui vagas suficiente ele é retornado
+                if(vagas >= vagasNecessarias){
+                    restaurants.add(restaurante);
+                }  
             }
             
         } catch (Exception e) {
            throw new AgencyException("Houve uma falha ao buscar os restaurantes");
         }
-        return null;
+        return restaurants;
+    }
+    
+    /**
+     * Método que pega a data inicial do pacote menos a data final e retorna o numero de dias corrido
+     * @param dataInicial
+     * @param dataFinal
+     * @return
+     * @throws ParseException 
+     */
+    public int contaDias(String dataInicial, String dataFinal) throws ParseException {  
+		  
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");  
+        df.setLenient(false);  
+  
+        Date dataInicio = null;
+		try {
+			dataInicio = df.parse(dataInicial);
+		} catch (java.text.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+        Date dataFim = null;
+		try {
+			dataFim = df.parse(dataFinal);
+		} catch (java.text.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+        long dt = (dataFim.getTime() - dataInicio.getTime()) + 3600000;  
+        long diasCorridosAnoLong = (dt / 86400000L);  
+  
+        String diasDecorridosInt = String.valueOf(diasCorridosAnoLong);  
+
+        int diasDecorridos = Integer.parseInt(diasDecorridosInt);  
+  
+        return diasDecorridos;  
     }
 
     /**
