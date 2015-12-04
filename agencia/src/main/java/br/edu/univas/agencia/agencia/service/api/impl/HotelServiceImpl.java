@@ -39,7 +39,7 @@ public class HotelServiceImpl implements HotelService {
 	@Override
 	public void createHotelReservation(HotelReserva hotelReserva)
 			throws AgencyException {
-		hotelBusiness.createReservation(hotelReserva);		
+		hotelBusiness.createReservation(hotelReserva);
 	}
 
 }
