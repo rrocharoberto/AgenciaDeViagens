@@ -13,13 +13,13 @@ import java.util.Map;
 
 public interface IRestaurantDAO {
     
-    public void save(Restaurante entity);
+    public void save(Restaurante entity) throws AgencyException;
     
-    public void update(Restaurante entity);
+    public void update(Restaurante entity) throws AgencyException;
     
-    public Restaurante getById(int id);
+    public Restaurante getById(int id) throws AgencyException;
     
-    public List<Restaurante> getAll();
+    public List<Restaurante> getAll() throws AgencyException;
     
     public Map<Restaurante, Float> getRestaurantsAvailable(Date inicio, Date fim, int idCidade) throws AgencyException;
     

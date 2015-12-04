@@ -21,7 +21,7 @@ public class RestaurantDAO extends GenericDAO<Restaurante, Long> implements IRes
     }
 
     /**
-     *
+     * Method responsible to obtain the list of restaurants and the sum of scheduled vacancies for him
      * @param inicio
      * @param fim
      * @param idCidade
@@ -63,6 +63,11 @@ public class RestaurantDAO extends GenericDAO<Restaurante, Long> implements IRes
         return reserveList;
     }
 
+    /**
+     * Method responsible for get the restaurant by id
+     * @param id
+     * @return 
+     */
     @Override
     public Restaurante getById(int id) {
 

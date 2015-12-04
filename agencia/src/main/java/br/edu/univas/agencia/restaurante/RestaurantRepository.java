@@ -79,7 +79,7 @@ public class RestaurantRepository implements IRestaurantRepository{
     }
 
     /**
-     * 
+     * Method responsible for creating the restaurant reservations
      * @param restauranteReserva
      * @throws AgencyException 
      */
@@ -88,6 +88,11 @@ public class RestaurantRepository implements IRestaurantRepository{
         restaurantReservationDAO.save(restauranteReserva);
     }
 
+    /**
+     * Method responsible for updating the restaurant reservations
+     * @param restauranteReserva
+     * @throws AgencyException 
+     */
     @Override
     public void updateRestaurantReservation(RestauranteReserva restauranteReserva) throws AgencyException {
         restaurantReservationDAO.update(restauranteReserva);
