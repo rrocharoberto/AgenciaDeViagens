@@ -19,6 +19,18 @@ public class ITuristicImpl {
 	public ITuristicImpl(){
 		ptDAO = new PontosTuristicosDAO(HibernateUtil.getEntityManager());
 	}
+	
+	public void doReservation(List<PontoTuristico> pontosTuristicos, Pacote pacote){
+		List<ReservaPontosTuristicos> rpt = new ArrayList<ReservaPontosTuristicos>();
+		
+		for(PontoTuristico pt : pontosTuristicos){
+			for(Date key : pt.getDaysAvailable().keySet()){
+				if(pt.getDaysAvailable().get(key)){
+					rpt.add(new ReservaPontosTuristicos(pacote,pt,key));
+				}
+			}
+		}
+	}
 
 	public List<PontoTuristico> getAvailableAttractions(Pacote pacote) throws ParseException{
 		List<Date> daysBetweenPeriod = new ArrayList<Date>();

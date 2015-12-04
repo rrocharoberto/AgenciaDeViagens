@@ -31,6 +31,14 @@ public class ReservaPontosTuristicos implements java.io.Serializable {
 	private PontoTuristico pontoTuristico;
 	private Date date;
 
+	public ReservaPontosTuristicos(){}
+	
+	public ReservaPontosTuristicos(Pacote pacote,
+			PontoTuristico pontoTuristico, Date date) {
+		this.pacote = pacote;
+		this.pontoTuristico = pontoTuristico;
+		this.date = date;
+	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

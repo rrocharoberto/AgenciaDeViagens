@@ -12,6 +12,7 @@ import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
 import br.edu.univas.agencia.model.ReservaPontosTuristicos;
+import br.edu.univas.agencia.pontos.bean.ReportBean;
 
 public class PontosTuristicosDAO {
 
@@ -31,6 +32,21 @@ public class PontosTuristicosDAO {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 			System.out.println("Problema ao add ponto turístico");
+		}
+	}
+	
+	public void doReservations(List<ReservaPontosTuristicos> reservations){
+		try {
+			entityManager.getTransaction().begin();
+			for(ReservaPontosTuristicos reservation : reservations){
+				entityManager.persist(reservation);
+				entityManager.flush();
+			}
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			System.out.println("Problema ao add reserva");
 		}
 	}
 	
@@ -71,6 +87,19 @@ public class PontosTuristicosDAO {
 			return query.getResultList();
 		}catch(NoResultException e){
 			return new ArrayList<PontoTuristico>();
+		}
+	}
+	
+	public List<ReservaPontosTuristicos> getVisitedAttractions(Date dataInicio, Date dataFim){
+		String q = "SELECT rpt from ReservaPontosTuristicos rpt where rpt.date between :dataInicio and :dataFim";
+		Query query = entityManager.createQuery(q);
+		query.setParameter("dataInicio", dataInicio);
+		query.setParameter("dataFim", dataFim);
+		
+		try{
+			return query.getResultList();
+		}catch(NoResultException e){
+			return new ArrayList<ReservaPontosTuristicos>();
 		}
 	}
 }
