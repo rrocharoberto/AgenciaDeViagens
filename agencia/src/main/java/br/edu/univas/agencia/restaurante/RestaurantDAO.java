@@ -2,53 +2,74 @@ package br.edu.univas.agencia.restaurante;
 
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Restaurante;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 /**
  * Class responsible by perform operations of restaurant module in data base.
  */
-public class RestaurantDAO extends GenericDAO<Restaurante, Long> implements IRestaurantDAO{
-    
-    EntityManager entityManager;
+public class RestaurantDAO extends GenericDAO<Restaurante, Long> implements IRestaurantDAO {
 
     public RestaurantDAO(EntityManager entityManager) {
         super(entityManager);
     }
-/**
- * 
- * @param inicio
- * @param fim
- * @param idCidade
- * @return
- * @throws AgencyException
- */
+
+    /**
+     *
+     * @param inicio
+     * @param fim
+     * @param idCidade
+     * @return
+     * @throws AgencyException
+     */
     @Override
-    public List<Restaurante> getRestaurantsAvailable(Date inicio, Date fim, int idCidade) throws AgencyException {
-     String sql = "select re.*\n" +
-        "	, sum(p.quantidade_pessoas) as soma\n" +
-        "from pacote p\n" +
-        "join restaurante_reserva rr on p.id = rr.pacote_id\n" +
-        "join restaurante re on re.id = rr.restaurante_id\n" +
-        "join cidade ci on ci.id = :cidade_id\n" +
-        "where rr.data_reserva between :inicio and :fim\n" +
-        "and re.cidade_id = 1\n" +
-        "group by re.id, re.nome, re.numero_vagas, re.valor, re.cidade_id";  
-     return null;
-     //TODO: not implemented.  Verificar como fazer isso via nativo usando Hibernate...
+    public Map<Restaurante, Float> getRestaurantsAvailable(Date inicio, Date fim, int idCidade) throws AgencyException {
         
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        
+        String sql = "select "
+                + "re.id, re.nome, re.numero_vagas, re.valor, re.cidade_id "
+                + ", sum(p.quantidade_pessoas) as soma "
+                + "from restaurante re "
+                + "left join restaurante_reserva rr on rr.restaurante_id = re.id "
+                + "left join pacote p on p.id = rr.pacote_id "
+                + "where (rr.data_reserva between '" + df.format(inicio) + "' and '" + df.format(fim) + "' or rr.data_reserva is null) "
+                + "and re.cidade_id = " + idCidade 
+                + " group by re.id, re.nome, re.numero_vagas, re.valor, re.cidade_id";
+ 
+        Map<Restaurante, Float> reserveList = new HashMap<Restaurante, Float>();
+        Query q = em.createNativeQuery(sql);
+        List<Object[]> result = q.getResultList();
+        
+        for (Object[] register : result) {
+            Restaurante re = new Restaurante();
+            Float value;
+            
+            re.setId(Integer.parseInt(register[0].toString()));
+            re.setNome(register[1].toString());
+            re.setNumeroVagas(Integer.parseInt(register[2].toString()));
+            re.setValor(Float.parseFloat(register[3].toString()));
+            value = Float.parseFloat(register[5].toString());
+            reserveList.put(re, value);
+        }
+        
+        
+        return reserveList;
     }
 
     @Override
     public Restaurante getById(int id) {
-        
+
         String sql = "Select * from restaurante re where  re.id = :idRestaurante";
-        Query query = entityManager.createQuery(sql);
-	query.setParameter("idCidade", id);
+        Query query = em.createQuery(sql);
+        query.setParameter("idCidade", id);
         return (Restaurante) query.getSingleResult();
     }
-
 
 }

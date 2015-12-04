@@ -9,6 +9,7 @@ import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Restaurante;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface IRestaurantDAO {
     
@@ -20,6 +21,6 @@ public interface IRestaurantDAO {
     
     public List<Restaurante> getAll();
     
-    public List<Restaurante> getRestaurantsAvailable(Date inicio, Date fim, int idCidade) throws AgencyException;
+    public Map<Restaurante, Float> getRestaurantsAvailable(Date inicio, Date fim, int idCidade) throws AgencyException;
     
 }

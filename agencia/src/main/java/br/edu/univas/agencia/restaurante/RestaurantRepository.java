@@ -5,6 +5,7 @@ import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.Restaurante;
 import br.edu.univas.agencia.model.RestauranteReserva;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import util.HibernateUtil;
 
@@ -73,10 +74,15 @@ public class RestaurantRepository implements IRestaurantRepository{
      * @throws AgencyException 
      */
     @Override
-    public List<Restaurante> getRestaurantsAvailable(Pacote pacote) throws AgencyException {
+    public Map<Restaurante, Float> getRestaurantsAvailable(Pacote pacote) throws AgencyException {
         return restaurantDAO.getRestaurantsAvailable(pacote.getDataInicio(), pacote.getDataFim(), pacote.getCidade().getId());
     }
 
+    /**
+     * 
+     * @param restauranteReserva
+     * @throws AgencyException 
+     */
     @Override
     public void createRestaurantReservation(RestauranteReserva restauranteReserva) throws AgencyException {
         restaurantReservationDAO.save(restauranteReserva);
