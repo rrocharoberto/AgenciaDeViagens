@@ -2,10 +2,8 @@ package br.edu.univas.agencia.agencia.service.api;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import br.edu.univas.agencia.exception.AgencyException;
-import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.Voo;
 import br.edu.univas.agencia.model.VooReserva;
 

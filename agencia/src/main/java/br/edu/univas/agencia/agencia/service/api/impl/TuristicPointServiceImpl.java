@@ -13,9 +13,7 @@ import br.edu.univas.agencia.agencia.business.TuristicPointBusiness;
 import br.edu.univas.agencia.agencia.service.api.TuristicPointService;
 import br.edu.univas.agencia.agencia.service.api.domain.AtractionsReservation;
 import br.edu.univas.agencia.exception.AgencyException;
-import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
-import br.edu.univas.agencia.pontos.business.impl.ITuristicImpl;
 
 /**
  * Implementation of services defined in {@link TuristicPointService}.

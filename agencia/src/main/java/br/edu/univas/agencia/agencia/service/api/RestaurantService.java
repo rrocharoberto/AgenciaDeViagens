@@ -3,9 +3,6 @@ package br.edu.univas.agencia.agencia.service.api;
 import java.util.Collection;
 
 import br.edu.univas.agencia.exception.AgencyException;
-import br.edu.univas.agencia.model.Hotel;
-import br.edu.univas.agencia.model.HotelReserva;
-import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.Restaurante;
 import br.edu.univas.agencia.model.RestauranteReserva;
 

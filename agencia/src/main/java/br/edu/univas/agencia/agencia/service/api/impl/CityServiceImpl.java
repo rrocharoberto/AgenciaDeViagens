@@ -8,7 +8,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import br.edu.univas.agencia.agencia.business.CityBusiness;
-import br.edu.univas.agencia.agencia.business.CityBusinessTest;
 import br.edu.univas.agencia.agencia.service.api.CityService;
 import br.edu.univas.agencia.exception.AgencyException;
 import br.edu.univas.agencia.model.Cidade;

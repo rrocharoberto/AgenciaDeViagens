@@ -2,7 +2,6 @@ package br.edu.univas.agencia.agencia.service.api.impl;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
