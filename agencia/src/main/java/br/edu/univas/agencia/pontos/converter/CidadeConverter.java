@@ -38,9 +38,9 @@ public class CidadeConverter implements Converter {
         return (String) value; 		
 	}
 	
-    protected void addAttribute(UIComponent component, Cidade o) {  
-        String key = o.getId().toString();  
-        this.getAttributesFrom(component).put(key, o);  
+    protected void addAttribute(UIComponent component, Cidade city) {  
+        String key = city.getId().toString();  
+        this.getAttributesFrom(component).put(key, city);  
     }  
     
     protected Map<String, Object> getAttributesFrom(UIComponent component) {  

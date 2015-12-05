@@ -15,7 +15,7 @@ import util.HibernateUtil;
 import br.edu.univas.agencia.agencia.dao.CityDAO;
 import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.PontoTuristico;
-import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
+import br.edu.univas.agencia.pontos.pontosdao.PontosTuristicosDAO;
 
 @ManagedBean(name = "pontosTuristicosController")
 @ViewScoped
@@ -27,8 +27,8 @@ public class PontosTuristicosController {
 	private CityDAO cityDao;
 	
 	private PontoTuristico pontoTuristico;
-	private PontoTuristico pontoTuristicoToEdit;
-	private PontoTuristico pontoTuristicoToDelete;
+	private PontoTuristico pontoTurEdit;
+	private PontoTuristico pontoTurDel;
 	
 	@PostConstruct
 	public void init(){
@@ -51,7 +51,7 @@ public class PontosTuristicosController {
 	}
 	
 	public void updatePontoTuristico(){
-		ptDAO.updateCostureira(pontoTuristicoToEdit);
+		ptDAO.updateCostureira(pontoTurEdit);
 		sendMessageToView("Ponto turístico atualizado com sucesso!", FacesMessage.SEVERITY_INFO);
 		
 		RequestContext request = RequestContext.getCurrentInstance();
@@ -62,8 +62,8 @@ public class PontosTuristicosController {
 	public void deletePontoTuristico() {
 
 		try {
-			ptDAO.removePontoTuristico(pontoTuristicoToDelete);
-			pontosTuristicos.remove(pontoTuristicoToDelete);
+			ptDAO.removePontoTuristico(pontoTurDel);
+			pontosTuristicos.remove(pontoTurDel);
 			sendMessageToView("Ponto turístico removido com sucesso!",
 					FacesMessage.SEVERITY_INFO);
 		} catch (Exception e) {
@@ -75,11 +75,11 @@ public class PontosTuristicosController {
 	}
 	
 	public void loadPontoTuristicoToEdit(PontoTuristico pontoTuristico){
-		pontoTuristicoToEdit = pontoTuristico;
+		pontoTurEdit = pontoTuristico;
 	}
 	
 	public void loadPontoTuristicoToDelete(PontoTuristico pontoTuristico){
-		pontoTuristicoToDelete = pontoTuristico;
+		pontoTurDel = pontoTuristico;
 	}
 	
 	
@@ -107,19 +107,19 @@ public class PontosTuristicosController {
 	}
 
 	public PontoTuristico getPontoTuristicoToEdit() {
-		return pontoTuristicoToEdit;
+		return pontoTurEdit;
 	}
 
-	public void setPontoTuristicoToEdit(PontoTuristico pontoTuristicoToEdit) {
-		this.pontoTuristicoToEdit = pontoTuristicoToEdit;
+	public void setPontoTuristicoToEdit(PontoTuristico pontoTurEdit) {
+		this.pontoTurEdit = pontoTurEdit;
 	}
 
 	public PontoTuristico getPontoTuristicoToDelete() {
-		return pontoTuristicoToDelete;
+		return pontoTurDel;
 	}
 
-	public void setPontoTuristicoToDelete(PontoTuristico pontoTuristicoToDelete) {
-		this.pontoTuristicoToDelete = pontoTuristicoToDelete;
+	public void setPontoTuristicoToDelete(PontoTuristico pontoTurDel) {
+		this.pontoTurDel = pontoTurDel;
 	}
 
 	public List<Cidade> getCidades() {

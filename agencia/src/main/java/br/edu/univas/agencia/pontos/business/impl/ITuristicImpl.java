@@ -10,7 +10,7 @@ import util.HibernateUtil;
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
 import br.edu.univas.agencia.model.ReservaPontosTuristicos;
-import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
+import br.edu.univas.agencia.pontos.pontosdao.PontosTuristicosDAO;
 
 public class ITuristicImpl {
 	
@@ -36,15 +36,15 @@ public class ITuristicImpl {
 		List<Date> daysBetweenPeriod = new ArrayList<Date>();
 		
 		//Get all attractions of the given city
-		List<PontoTuristico> attractionsOfTheCity = null;
+		List<PontoTuristico> attractionsCity = null;
 		
-		attractionsOfTheCity = ptDAO.getAttractionsByCity(pacote.getCidade());
+		attractionsCity = ptDAO.getAttractionsByCity(pacote.getCidade());
 		
 		//Get all days of the given period.
 		getDaysOfPeriod(pacote,daysBetweenPeriod);
 		
 		//Get days available for each attractions.
-		for(PontoTuristico attraction : attractionsOfTheCity){
+		for(PontoTuristico attraction : attractionsCity){
 			for(Date date : daysBetweenPeriod){
 				getDaysAvailableForAttraction(attraction, date, pacote.getQuantidadePessoas());
 			}
@@ -52,19 +52,19 @@ public class ITuristicImpl {
 		
 		//Remove attractions which is not available in the 
 		//period defined in the package.
-		removeAttractionsNotAvailable(attractionsOfTheCity);
+		removeAttractionsNotAvailable(attractionsCity);
 		
-		return attractionsOfTheCity;
+		return attractionsCity;
 	}
 	
-	public void getDaysOfPeriod(Pacote pacote, List<Date> daysBetweenPeriods) throws ParseException {
+	public void getDaysOfPeriod(Pacote pacote, List<Date> dayyBetwPeriods) throws ParseException {
 		Date dt1 = pacote.getDataInicio();
 		Date dt2 = pacote.getDataFim();
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dt1);
 		for (Date dt = cal.getTime(); dt.compareTo(dt2) <= 0;) {
-			daysBetweenPeriods.add(dt);
+			dayyBetwPeriods.add(dt);
 			cal.add(Calendar.DATE, +1);
 			dt = cal.getTime();
 		}
@@ -78,12 +78,12 @@ public class ITuristicImpl {
 	public void getDaysAvailableForAttraction(PontoTuristico attraction, 
 			Date date, int numberOfPeople){
 		
-		List<ReservaPontosTuristicos> reservasPontosTuristicos = null;
-		reservasPontosTuristicos = ptDAO.getReservationAttractions(attraction, date);
+		List<ReservaPontosTuristicos> reservasPtTurist = null;
+		reservasPtTurist = ptDAO.getReservationAttractions(attraction, date);
 		int totalReserved = 0;
 		int reservasAvailable = 0;
 		
-		for(ReservaPontosTuristicos rpt : reservasPontosTuristicos){
+		for(ReservaPontosTuristicos rpt : reservasPtTurist){
 			totalReserved = rpt.getPacote().getQuantidadePessoas();
 		}
 		
@@ -98,13 +98,13 @@ public class ITuristicImpl {
 	public void removeAttractionsNotAvailable(List<PontoTuristico> attractions){
 		
 		//This is because the concurrency alteration problem
-		List<PontoTuristico> attractionsToBeRemoved = new ArrayList<PontoTuristico>();
+		List<PontoTuristico> attractionsRmv = new ArrayList<PontoTuristico>();
 		
 		for(PontoTuristico pt : attractions){
 			if(pt.getDaysAvailable().isEmpty()){
-				attractionsToBeRemoved.add(pt);
+				attractionsRmv.add(pt);
 			}
 		}
-		attractions.removeAll(attractionsToBeRemoved);
+		attractions.removeAll(attractionsRmv);
 	}
 }

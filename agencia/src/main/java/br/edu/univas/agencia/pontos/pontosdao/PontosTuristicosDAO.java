@@ -1,4 +1,4 @@
-package br.edu.univas.agencia.pontos.pontosDAO;
+package br.edu.univas.agencia.pontos.pontosdao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +12,6 @@ import br.edu.univas.agencia.model.Cidade;
 import br.edu.univas.agencia.model.Pacote;
 import br.edu.univas.agencia.model.PontoTuristico;
 import br.edu.univas.agencia.model.ReservaPontosTuristicos;
-import br.edu.univas.agencia.pontos.bean.ReportBean;
 
 public class PontosTuristicosDAO {
 
@@ -29,8 +28,6 @@ public class PontosTuristicosDAO {
 			entityManager.flush();
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
-			e.printStackTrace();
 			System.out.println("Problema ao add ponto turístico");
 		}
 	}
@@ -43,7 +40,6 @@ public class PontosTuristicosDAO {
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
-			e.printStackTrace();
 			System.out.println("Problema ao atualizar Ponto Turistico");
 		}
 	}
@@ -52,14 +48,13 @@ public class PontosTuristicosDAO {
 		try {
 			entityManager.getTransaction().begin();
 			String query = "DELETE from ponto_turistico where id = :idPonto";
-			Query q = entityManager.createNativeQuery(query);
-			q.setParameter("idPonto", pontoTuristico.getId());
-			q.executeUpdate();
+			Query query2 = entityManager.createNativeQuery(query);
+			query2.setParameter("idPonto", pontoTuristico.getId());
+			query2.executeUpdate();
 			entityManager.flush();
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
-			e.printStackTrace();
 			System.out.println("Problema ao remover Ponto Turístico");
 			throw e;
 		}
@@ -76,30 +71,29 @@ public class PontosTuristicosDAO {
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
-			e.printStackTrace();
 			System.out.println("Problema ao add reserva");
 		}
 	}
 	
 	public Pacote getPacoteById(int id){
-		String q = "Select p from Pacote p where p.id = :id";
-		Query query = entityManager.createQuery(q);
+		String queryPct = "Select p from Pacote p where p.id = :id";
+		Query query = entityManager.createQuery(queryPct);
 		query.setParameter("id", id);
 		return (Pacote)query.getSingleResult();
 	}
 	
 	public List<PontoTuristico> getAttractionsByCity(Cidade cidade){
-		String q = "SELECT pt from PontoTuristico pt join pt.cidade c where c.id = :idCidade";
-		Query query = entityManager.createQuery(q);
+		String queryPTur = "SELECT pt from PontoTuristico pt join pt.cidade c where c.id = :idCidade";
+		Query query = entityManager.createQuery(queryPTur);
 		query.setParameter("idCidade", cidade.getId());
 		return query.getResultList();
 	}
 	
 	public List<ReservaPontosTuristicos> getReservationAttractions(PontoTuristico attraction, Date date){
 		
-		String q = "SELECT rpt from ReservaPontosTuristicos rpt join rpt.pontoTuristico pt"
+		String queryReserva = "SELECT rpt from ReservaPontosTuristicos rpt join rpt.pontoTuristico pt"
 				+ " where rpt.date = :dateReceived and pt.id = :pontoTuristicoId";
-		Query query = entityManager.createQuery(q);
+		Query query = entityManager.createQuery(queryReserva);
 		query.setParameter("dateReceived", date);
 		query.setParameter("pontoTuristicoId", attraction.getId());
 		
@@ -111,8 +105,8 @@ public class PontosTuristicosDAO {
 	}
 	
 	public List<PontoTuristico> listAllAttractions(){
-		String q = "SELECT p from PontoTuristico p";
-		Query query = entityManager.createQuery(q);
+		String queryPt = "SELECT p from PontoTuristico p";
+		Query query = entityManager.createQuery(queryPt);
 		
 		try{
 			return query.getResultList();
@@ -122,8 +116,8 @@ public class PontosTuristicosDAO {
 	}
 	
 	public List<ReservaPontosTuristicos> getVisitedAttractions(Date dataInicio, Date dataFim){
-		String q = "SELECT rpt from ReservaPontosTuristicos rpt where rpt.date between :dataInicio and :dataFim";
-		Query query = entityManager.createQuery(q);
+		String queryRPT = "SELECT rpt from ReservaPontosTuristicos rpt where rpt.date between :dataInicio and :dataFim";
+		Query query = entityManager.createQuery(queryRPT);
 		query.setParameter("dataInicio", dataInicio);
 		query.setParameter("dataFim", dataFim);
 		

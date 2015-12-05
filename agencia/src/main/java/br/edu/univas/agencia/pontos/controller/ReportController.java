@@ -20,13 +20,13 @@ import util.HibernateUtil;
 import util.HttpRequestUtil;
 import br.edu.univas.agencia.model.ReservaPontosTuristicos;
 import br.edu.univas.agencia.pontos.bean.ReportBean;
-import br.edu.univas.agencia.pontos.pontosDAO.PontosTuristicosDAO;
+import br.edu.univas.agencia.pontos.pontosdao.PontosTuristicosDAO;
 
 import com.google.gson.Gson;
 
 @ManagedBean(name = "reportController")
 @ViewScoped
-public class reportController {
+public class ReportController {
 
 	private Date dataInicio;
 	private Date dataFim;
@@ -37,6 +37,9 @@ public class reportController {
 	private List<ReportBean> reportData;
 	private String reportDataJson;
 	PontosTuristicosDAO ptDAO;
+	
+	private DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
 	
 	@PostConstruct
 	public void init(){
@@ -50,13 +53,11 @@ public class reportController {
 		reservas = ptDAO.getVisitedAttractions(dataInicio, dataFim);
 		buildReport(reservas);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");  
 		showDataInicio = sdf.format(dataInicio);  
 		showDataFim = sdf.format(dataFim);  
 	}
 	
 	public void updateReport(){
-		 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");  
 		 String dataIni = sdf.format(dataInicio);  
 		 String dataFinal = sdf.format(dataFim);  
 		
@@ -99,7 +100,6 @@ public class reportController {
 		  
 		try {
 			if (dateFrom != null) {
-				DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 				dataInicio = (Date) formatter.parse(String.valueOf(dateFrom));
 			} else {
 				Calendar cal = Calendar.getInstance();
@@ -107,7 +107,7 @@ public class reportController {
 			}
 			
 			if (dateTo != null) {
-				DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+				
 				dataFim = (Date) formatter.parse(String.valueOf(dateTo));
 			} else {
 				Calendar cal = Calendar.getInstance();
@@ -115,7 +115,6 @@ public class reportController {
 			}
 
 		} catch (ParseException e) {
-			e.printStackTrace();
 			Calendar cal = Calendar.getInstance();
 			dataInicio = cal.getTime();
 			dataFim = cal.getTime();
